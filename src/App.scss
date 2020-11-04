@@ -1,0 +1,84 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+  supported by Chrome, Opera and Firefox */
+}
+
+.App {
+  height: calc(var(--vh, 1vh) * 100);
+  font-family: "Roboto", sans-serif;
+  color: #343A40;
+  background-color:#F5F5F5;
+  .top-bar{
+    position: absolute;
+    width: 100%;
+    height: 6%;
+    background-color: white;
+    z-index: 1;
+    box-shadow: 0 3px 3px #0000000e;
+  }
+  .side-bar{
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 3px 0 3px #0000000e;
+
+    .title{
+      font-size: 1.2rem;
+      width: 100%;
+      height: 6%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      color: #343A40;
+      text-decoration: none;
+    }
+    .toolbar{
+      height: 94%;
+      width: 100%;
+      padding: 16% 6% 16% 6%;
+      .nofocus:focus{
+        outline: none;
+        box-shadow: none;
+        background-color: #007bff;
+        border-color: #007bff;
+      }
+      Button{
+        font-size: 1rem;
+        text-align: left;
+        padding: 10px 15px 10px 15px;
+
+        svg{
+          width: 20px;
+          margin-bottom: 3px;
+          margin-right: 12px;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+  .content-container{
+    position: absolute;
+    top:6%;
+    left:20%;
+    width: 80%;
+    height: 94%;
+    z-index: 0;
+  }
+}
