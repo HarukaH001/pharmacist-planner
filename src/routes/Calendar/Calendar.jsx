@@ -35,7 +35,7 @@ export const Calendar = () => {
 
         return ar.map((ele, i) => {
             return (
-                <th className="date-th" key={"h" + ele}>
+                <th className="date-th noselect" key={"h" + ele}>
                     {ele}
                 </th>
             )
@@ -51,7 +51,7 @@ export const Calendar = () => {
 
         return ar.map((ele, i) => {
             return (
-                <td className="stat-td" key={"h" + ele}>
+                <td className="stat-td noselect" key={"h" + ele}>
                     x
                 </td>
             )
@@ -69,15 +69,15 @@ export const Calendar = () => {
             if(i%2 === 0){
                 return (
                     <tr key={"r1-"+i}>
-                        <td className="name-td" colSpan="2" rowSpan="2">วรุณนาโศรก</td>
-                        <td className="name-sec-td">นอก</td>
+                        <td className="name-td add-line" colSpan="2" rowSpan="2">วรุณนาโศรก</td>
+                        <td className="name-sec-td noselect">นอก</td>
                         {renderTableBody()}
                     </tr>
                 )
             } else {
                 return (
                     <tr key={"r2-"+i} className="add-line">
-                        <td className="name-sec-td">ใน</td>
+                        <td className="name-sec-td noselect">ใน</td>
                         {renderTableBody()}
                     </tr>
                 )
@@ -104,7 +104,7 @@ export const Calendar = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th className="name-th" colSpan="3">Name</th>
+                                <th className="name-th noselect" colSpan="3">ชื่อ</th>
                                 {renderTableHead()}
                             </tr>
                         </thead>
@@ -115,7 +115,7 @@ export const Calendar = () => {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th className="name-th" colSpan="3">Name</th>
+                                <th className="name-th" colSpan="3">ชื่อ</th>
                                 {renderTableHead()}
                             </tr>
                         </thead>
@@ -123,7 +123,7 @@ export const Calendar = () => {
                     <Table striped bordered hover className="edit-table">
                         <thead>
                             <tr>
-                                <th className="name-th" colSpan="3">Name</th>
+                                <th className="name-th" colSpan="3">ชื่อ</th>
                                 {renderTableHead()}
                             </tr>
                         </thead>
@@ -133,7 +133,7 @@ export const Calendar = () => {
                     </Table>
                 </div>
 
-                <div className="wrapper-012"></div>
+                {/* <div className="wrapper-012"></div> */}
             </div>
         </div>
     )

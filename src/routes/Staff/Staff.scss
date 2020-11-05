@@ -3,4 +3,222 @@
     width: 100%;
     height: 100%;
     background-color:#F5F5F5;
+
+    .create-form{
+        position: absolute;
+        z-index: 910;
+        top: calc(var(--vh, 1vh) *(-6));
+        left: -20vw;
+        background-color: #343a40bb;
+        width: calc(100% + 20vw);
+        height: calc(100% + var(--vh, 1vh) *6);
+
+        .form-container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #F5F5F5;
+            width: 30%;
+            height: 50%;
+            padding: 1.75rem 2rem 1.75rem 0;
+            label{
+                text-align: right;
+            }
+            #name-form, #age-form, #sex-form, #tel-form{
+                background-color: white;
+                border-radius: 5px;
+                border: none;
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                    border: none;
+                }
+            }
+            .checkbox-center{
+                width: fit-content;
+                height: fit-content;
+                margin-top: 0.4rem;
+            }
+            .cancel-btn{
+                border: 1px solid #717579;
+                width: 100%;
+                &:focus{
+                    background-color: white;
+                    box-shadow: none;
+                }
+                &:hover{
+                    background-color: #e3e8ec;
+                }
+            }
+            .submit-btn{
+                width: 100%;
+                &:focus{
+                    background-color: #007bff;
+                    box-shadow: none;
+                }
+                &:hover{
+                    background-color: #0065d1;
+                }
+            }
+        }
+    }
+
+    .container{
+        margin-top: 4%;
+        left: 2%;
+        width: 96%;
+        height: 92%;
+        padding: 0;
+
+        .add-user-wrapper{
+            // cursor: pointer;
+            position: absolute;
+            right: 2%;
+            width: 135px;
+            min-height: 35px;
+
+            .nofocus:focus{
+                outline: none;
+                box-shadow: none;
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+            .nofocus:hover{
+                background-color:#0065d1;
+            }
+            
+            Button{
+                height: 35px;
+            }
+        }
+        .wrapper{
+            position: absolute;
+            left: 2%;
+            width: 96%;
+            height: 80%;
+            margin-top: calc(4% + 15px);
+            overflow-y: scroll;
+            z-index: 1;
+
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+            &::-webkit-scrollbar{
+                display: none;
+            }
+            // background-color: teal;
+            
+            Table{ 
+                // background-color: #ffffff;
+                position: absolute;
+                color: #373A3C;
+                table-layout: fixed;
+                @media only screen and (max-width: 1024px){
+                    font-size: 0.75rem;
+                }
+                @media only screen and (min-width: 1025px){
+                    font-size: 1rem;
+                }
+                overflow: hidden;
+                width: 100%;
+                // border-color: #f5f5f5;
+                // border-right-color: #dee2e6;
+                // border-left-color: #dee2e6;
+                border: none;
+
+                th{
+                    border: none;
+                    background-color:  #f5f5f5;
+                    color:  #f5f5f5;
+                }
+
+                td{
+                    background-color: #ffffff;
+                }
+
+                .tag-td{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    width: 5%;
+                }
+                .name-td{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    width: 25%;
+                }
+                .age-td{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.can-td{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.nut-td{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.preg-td{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.tel-td{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    width: 25%;
+                }
+
+                .add-line{
+                    border-bottom: 1.5px solid #e2e5e9;
+                }
+            }
+        }
+
+        .wrapper-0{
+            left: 2%;
+            position: absolute;
+            width: 96%;
+            height: fit-content;
+            // height: calc(100% - 120px);
+            margin-top: calc(4% + 15px);
+            z-index: 2;
+            
+            Table{ 
+                background-color: #ffffff;
+                position: absolute;
+                color: #373A3C;
+                table-layout: fixed;
+                @media only screen and (max-width: 1024px){
+                    font-size: 0.75rem;
+                }
+                @media only screen and (min-width: 1025px){
+                    font-size: 1rem;
+                }
+                overflow: hidden;
+                width: 100%;
+
+                .tag-th{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    width: 5%;
+                }
+                .name-th{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    width: 25%;
+                }
+                .age-th{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.can-th{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.nut-th{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.preg-th{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    
+                }.tel-th{
+                    padding: 0.6rem 0 0.6rem 1rem;
+                    width: 25%;
+                }
+
+                .add-line{
+                    border-bottom: 1.5px solid #d1d6db;
+                }
+            }
+        }
+    }
 }
