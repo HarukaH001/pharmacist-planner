@@ -97,7 +97,11 @@ export const Calendar = () => {
                     </div>
                     <div className="text pick">{selectedMonth}</div>
                     </div>
-                    {picker?<div className="modal-picker pick"></div>:null}
+                    {picker?<div className="modal-picker pick">
+                        <div className="modal-wrapper pick">
+
+                        </div>
+                    </div>:null}
                 </div>
 
                 <div className="wrapper-0">
