@@ -13,19 +13,20 @@ export const Staff = () => {
     const [cSex, setCSex] = useState()
     const [cTel, setCTel] = useState()
     const [form, showForm] = useState(false)
+    const [loading, setLoading] = useState(false)
     const formRef = useRef()
     // const history = useHistory()
 
     window.onclick = (e) => {
         e.preventDefault()
-        if (e.target.classList.contains('form')) {
+        if (e.target.classList.contains('form') & !loading) {
             showForm(false)
             clearFormState()
         }
     }
 
     useEffect(() =>{
-        if(!form)clearFormState()
+        clearFormState()
     },[form])
 
     function clearFormState(){
@@ -36,11 +37,30 @@ export const Staff = () => {
         setCAge()
         setCSex()
         setCTel()
+        setLoading(false)
+    }
+
+    function errorForm(){
+        document.getElementById('name-form').style.borderColor = cName?'white':'#e94c4c'
+        document.getElementById('age-form').style.borderColor = cAge?'white':'#e94c4c'
+        document.getElementById('sex-form').style.borderColor = cSex?'white':'#e94c4c'
+        document.getElementById('tel-form').style.borderColor = (cTel && cTel.length === 10)?'white':'#e94c4c'
+    }
+
+    async function submitForm(e){
+        errorForm()
+        if(!cName || !cAge || !cSex || !cTel || (cTel && cTel.length !== 10)){
+
+        } else {
+            setLoading(true)
+            await new Promise((resolve) => setTimeout(resolve, 2000))
+            showForm(false)
+        }
     }
 
     function renderUserTable() {
         let ar = []
-        const count = 31
+        const count = 13
         for (let i = 0; i < count; i++) {
             ar[i] = i + 1
         }
@@ -76,13 +96,13 @@ export const Staff = () => {
         <div className="Staff">
             {form ? <div className="create-form form">
                 <div className="form-container">
-                    <Form ref={formRef}>
+                    <Form ref={formRef} autoComplete="off">
                         <Form.Group as={Row} controlId="name-form">
                             <Form.Label column className="noselect">
                                 ชื่อ
                             </Form.Label>
                             <Col xs={7}>
-                                <Form.Control type="text" onChange={(e)=>setCName(e.target.value)}/>
+                                <Form.Control type="text" onChange={(e)=>setCName(e.target.value)} style={{borderColor:"white"}}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="age-form">
@@ -90,7 +110,10 @@ export const Staff = () => {
                                 อายุ
                             </Form.Label>
                             <Col xs={7}>
-                                <Form.Control type="text" onChange={(e)=>setCAge(e.target.value)}/>
+                                <Form.Control type="text" maxLength="3" onChange={(e)=>{
+                                    if(/^\d+$/.test(e.target.value)) setCAge(e.target.value)
+                                    else e.target.value = e.target.value.replace(/[^0-9]/g, "")
+                                }}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="sex-form">
@@ -99,7 +122,7 @@ export const Staff = () => {
                             </Form.Label>
                             <Col xs={7}>
                                 <Form.Control as="select" defaultValue="x" className="noselect" onChange={(e)=>setCSex(e.target.value)}>
-                                    <option value="x" disabled>เลือกเพศ</option>
+                                    <option value="x" disabled>กรุณาเลือก</option>
                                     <option value="m">ชาย</option>
                                     <option value="f">หญิง</option>
                                     <option value="o">อื่น ๆ (ไม่ระบุ)</option>
@@ -111,7 +134,10 @@ export const Staff = () => {
                                 เบอร์โทร
                             </Form.Label>
                             <Col xs={7}>
-                                <Form.Control type="text" onChange={(e)=>setCTel(e.target.value)}/>
+                                <Form.Control type="text" maxLength="10" onChange={(e)=>{
+                                    if(/^\d+$/.test(e.target.value)) setCTel(e.target.value)
+                                    else e.target.value = e.target.value.replace(/[^0-9]/g, "")
+                                }}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="preg-form" >
@@ -167,8 +193,12 @@ export const Staff = () => {
                         </Form.Group>
                         <Form.Group as={Row} controlId="sub-form">
                             <Col xs={6}></Col>
-                            <Col><Button className="cancel-btn" variant="light" onClick={()=>showForm(false)}>Cancel</Button></Col>
-                            <Col><Button className="submit-btn" variant="primary">Submit</Button></Col>
+                            <Col><Button className="cancel-btn" variant="light" onClick={()=>showForm(false)} disabled={loading}>Cancel</Button></Col>
+                            <Col><Button className="submit-btn" variant="primary" onClick={submitForm} disabled={loading}>{loading?(
+                                <svg width="1.2em" height="1.4em" viewBox="0 0 16 16" className="bi bi-hourglass-split" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fillRule="evenodd" d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13s-.866-1.299-3-1.48V8.35z"/>
+                                </svg>
+                            ):"Submit"}</Button></Col>
                         </Form.Group>
                     </Form>
                 </div>

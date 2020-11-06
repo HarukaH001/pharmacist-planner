@@ -19,22 +19,29 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: #F5F5F5;
-            width: 30%;
-            height: 50%;
-            padding: 1.75rem 2rem 1.75rem 0;
+            border-radius: 5px;
+            // width: 30%;
+            // height: 50%;
+            width: 576px;
+            // height: 474px;
+            height: fit-content;
+            padding: 1.75rem 2rem 0.75rem 0;
             label{
                 text-align: right;
             }
             #name-form, #age-form, #sex-form, #tel-form{
                 background-color: white;
                 border-radius: 5px;
-                border: none;
+                border-color: white;
                 &:focus{
                     outline: none;
                     box-shadow: none;
-                    border: none;
                 }
             }
+
+            input{
+            }
+
             .checkbox-center{
                 width: fit-content;
                 height: fit-content;
@@ -138,14 +145,15 @@
 
                 .tag-td{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    width: 5%;
+                    width: 7.5%;
                 }
                 .name-td{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    width: 25%;
+                    width: 30%;
                 }
                 .age-td{
                     padding: 0.6rem 0 0.6rem 1rem;
+                    width: 7.5%;
                     
                 }.can-td{
                     padding: 0.6rem 0 0.6rem 1rem;
@@ -158,7 +166,7 @@
                     
                 }.tel-td{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    width: 25%;
+                    width: 18%;
                 }
 
                 .add-line{
@@ -192,14 +200,15 @@
 
                 .tag-th{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    width: 5%;
+                    width: 7.5%;
                 }
                 .name-th{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    width: 25%;
+                    width: 30%;
                 }
                 .age-th{
                     padding: 0.6rem 0 0.6rem 1rem;
+                    width: 7.5%;
                     
                 }.can-th{
                     padding: 0.6rem 0 0.6rem 1rem;
@@ -212,7 +221,7 @@
                     
                 }.tel-th{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    width: 25%;
+                    width: 18%;
                 }
 
                 .add-line{

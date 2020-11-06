@@ -60,7 +60,7 @@ export const Calendar = () => {
 
     function renderUserTable() {
         let ar = []
-        const count = 31
+        const count = 13
         for (let i = 0; i < count*2; i++) {
             ar[i] = i + 1
         }
