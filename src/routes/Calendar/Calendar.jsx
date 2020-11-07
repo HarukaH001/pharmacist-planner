@@ -99,7 +99,7 @@ export const Calendar = () => {
                     </div>
                     {picker?<div className="modal-picker pick">
                         <div className="modal-wrapper pick">
-
+                            
                         </div>
                     </div>:null}
                 </div>
@@ -116,14 +116,6 @@ export const Calendar = () => {
                 </div>
 
                 <div className="wrapper">
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th className="name-th" colSpan="3">ชื่อ</th>
-                                {renderTableHead()}
-                            </tr>
-                        </thead>
-                    </Table>
                     <Table striped bordered hover className="edit-table">
                         <thead>
                             <tr>

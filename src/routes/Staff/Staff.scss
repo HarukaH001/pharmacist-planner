@@ -13,6 +13,41 @@
         width: calc(100% + 20vw);
         height: calc(100% + var(--vh, 1vh) *6);
 
+        .del-form-container{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #F5F5F5;
+            border-radius: 5px;
+            width: 500px;
+            height: fit-content;
+            padding: 1.75rem 2rem 0.75rem 0;
+
+            .content-text{
+                padding: 0 0 1rem 2rem;
+                text-align: center;
+            }
+
+            .cancel-btn{
+                border: 1px solid #717579;
+                width: 100%;
+                &:focus{
+                    background-color: white;
+                    box-shadow: none;
+                }
+                &:hover{
+                    background-color: #e3e8ec;
+                }
+            }
+            .submit-btn{
+                width: 100%;
+                &:focus{
+                    box-shadow: none;
+                }
+            }
+        }
+
         .form-container{
             position: absolute;
             top: 50%;
@@ -70,30 +105,32 @@
 
     .container{
         margin-top: 4%;
-        left: 2%;
-        width: 96%;
-        height: 92%;
         padding: 0;
 
         .add-user-wrapper{
-            // cursor: pointer;
+            width: 96%;
             position: absolute;
             right: 2%;
-            width: 135px;
             min-height: 35px;
 
             .nofocus:focus{
                 outline: none;
                 box-shadow: none;
-                background-color: #007bff;
-                border-color: #007bff;
-            }
-            .nofocus:hover{
-                background-color:#0065d1;
             }
             
             Button{
+                position: relative;
+                width: 135px;
                 height: 35px;
+                margin: 0 0 0 25px;
+                float: right;
+            }
+
+            .delete-user-btn, .edit-user-btn, .x-user-btn{
+                float: left;
+                margin: 0 10px 0 0;
+                height: 35px;
+                width: 35px;
             }
         }
         .wrapper{
@@ -125,9 +162,6 @@
                 }
                 overflow: hidden;
                 width: 100%;
-                // border-color: #f5f5f5;
-                // border-right-color: #dee2e6;
-                // border-left-color: #dee2e6;
                 border: none;
 
                 th{
@@ -136,8 +170,21 @@
                     color:  #f5f5f5;
                 }
 
-                td{
-                    background-color: #ffffff;
+                .content-row{
+                    background-color: white;
+                    &:hover{
+                        background-color: #d2d6da09;
+                    }
+                }
+                .selection-box{
+                    padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+                    width: 35px;
+                }
+
+                .s{
+                    &:hover{
+                        border-bottom: 2.5px solid #3c69ff;
+                    }
                 }
 
                 .tag-td{
@@ -177,7 +224,6 @@
             position: absolute;
             width: 96%;
             height: fit-content;
-            // height: calc(100% - 120px);
             margin-top: calc(4% + 15px);
             z-index: 2;
             
@@ -194,6 +240,11 @@
                 }
                 overflow: hidden;
                 width: 100%;
+
+                .selection-box{
+                    padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+                    width: 35px;
+                }
 
                 .tag-th{
                     padding: 0.6rem 0 0.6rem 1rem;
