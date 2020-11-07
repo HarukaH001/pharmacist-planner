@@ -1,13 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Calendar.scss';
 import Table from 'react-bootstrap/Table'
+import { Col, Row, Form } from 'react-bootstrap'
+import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
 // import { Link, useLocation, useHistory } from 'react-router-dom';
 
 export const Calendar = () => {
     const [selectedMonth, setSelectedMonth] = useState(formatMonth((new Date()).toISOString().substring(0, 7)))
+    const [lastSelected, setLastSelected] = useState()
     const [picker, showPicker] = useState(false)
     const pickerRef = useRef()
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    
 
     window.onclick = (e) => {
         e.preventDefault()
@@ -16,13 +20,19 @@ export const Calendar = () => {
         }
     }
 
-    useEffect(() => {
-        console.log(picker)
-    }, [picker])
+    useEffect(()=>{
+        if(!picker && selectedMonth !== lastSelected){
+            let date = new Date()
+            let [mm, yyyy] = selectedMonth.split('/')
+            date.setMonth(mm-1)
+            date.setFullYear(yyyy)
+            console.log('fetch data of ' + (date.toISOString()))
+            setLastSelected(selectedMonth)
+        }
+    },[picker])
 
     function formatMonth(date) {
         const [yyyy, mm] = date.split('-')
-
         return mm + '/' + yyyy
     }
 
@@ -85,6 +95,69 @@ export const Calendar = () => {
         })
     }
 
+    function renderMonthPicker(){
+        const [mm, yyyy] = selectedMonth.split('/')
+
+        return (
+            <div className="modal-wrapper pick">
+                <Row className="c-row pick">
+                    <Col className="c-col pick" style={{paddingRight:'0'}} onClick={()=>setSelectedMonth(mm + "/" + ((parseInt(yyyy)-1 > 1969)?parseInt(yyyy)-1:yyyy))}>
+                        <div className="c-col-1 pick">
+                            <svg width="1em" height="1em" viewBox="0 1.5 16 16" className="bi bi-chevron-left pick" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path className="pick" fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </div>
+                    </Col>
+                    <Col className="c-col pick" style={{paddingRight:'3px',paddingLeft:'3px'}}>
+                        <div className="c-col-2 pick">
+                            <div className="year pick">{yyyy}</div>
+                        </div>
+                    </Col>
+                    <Col className="c-col pick" style={{paddingLeft:'0'}}onClick={()=>setSelectedMonth(mm + "/" + (parseInt(yyyy)+1))}>
+                        <div className="c-col-3 pick">
+                            <svg width="1em" height="1em" viewBox="0 1.5 16 16" className="bi bi-chevron-right pick" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path className="pick" fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+                    </Col>
+                </Row>
+
+                {renderMonths()}
+            </div>
+        )
+    }
+
+    function renderMonths() {
+        const [mm, yyyy] = selectedMonth.split('/')
+        let ar = []
+        const count = 4
+        for (let i = 0; i < count; i++) {
+            ar[i] = i + 1
+        }
+
+        return ar.map((ele,i)=>{
+            return (
+                <Row className="d-row pick" key={"d-pick-"+i}>
+                    <Col className={"d-col pick"} style={{paddingRight:'0'}}>
+                        <div className={"d-col-1 pick" + (parseInt(mm)===(i*3+1) ? " selected":"")} onClick={()=>setSelectedMonth((i*3+1) + "/" + yyyy)}>
+                            <div className="month pick">{months[i*3]}</div>
+                        </div>
+                    </Col>
+                    <Col className={"d-col pick"} style={{paddingRight:'3px',paddingLeft:'3px'}}>
+                        <div className={"d-col-2 pick" + (parseInt(mm)===(i*3+2) ? " selected":"")} onClick={()=>setSelectedMonth((i*3+2) + "/" + yyyy)}>
+                            <div className="month pick">{months[i*3+1]}</div>
+                        </div>
+                    </Col>
+                    <Col className={"d-col pick"} style={{paddingLeft:'0'}}>
+                        <div className={"d-col-3 pick" + (parseInt(mm)===(i*3+3) ? " selected":"")} onClick={()=>setSelectedMonth((i*3+3) + "/" + yyyy)}>
+                            <div className="month pick">{months[i*3+2]}</div>
+                        </div>
+                    </Col>
+                </Row>
+            )
+        })
+    }
+
     return (
         <div className="Calendar">
             <div className="container">
@@ -98,9 +171,7 @@ export const Calendar = () => {
                     <div className="text pick">{selectedMonth}</div>
                     </div>
                     {picker?<div className="modal-picker pick">
-                        <div className="modal-wrapper pick">
-                            
-                        </div>
+                        {renderMonthPicker()}
                     </div>:null}
                 </div>
 
