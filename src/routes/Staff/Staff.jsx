@@ -137,7 +137,17 @@ export const Staff = () => {
         if(selection.length !== 0){
             setLoading(true)
             await new Promise((resolve) => setTimeout(resolve, 2000))
-            console.log('Delete ' + selection)
+            let newData = await axios.post(base_url+'/delete_bash', {
+                pid: selection.map(ele=>{
+                    const user = users.find(content=>content.id === ele)
+                    if(user){
+                        return user.pid
+                    } else return null
+                }).filter(ele=>ele!==null)
+            })
+            if(newData?.data){
+                setUsers(newData.data.sort((a,b)=>a.id-b.id))
+            }
             showDForm(false)
         }
     }
@@ -151,8 +161,21 @@ export const Staff = () => {
             await new Promise((resolve) => setTimeout(resolve, 2000))
             if(form){
                 console.log('create form')
+                const content = {
+                    name: cName,
+                    sex: cSex,
+                    age: cAge,
+                    role: 'เภสัช',
+                    phone: cTel,
+                    nutrient: cNut,
+                    cancer: cCan,
+                    pregnant: cPreg
+                }
+                let newData = await axios.post(base_url+'/add',content)
+                if(newData?.data){
+                    setUsers(newData.data.sort((a,b)=>a.id-b.id))
+                }
             } else if(eForm){
-                console.log('edit form')
                 const user = users.find(ele=>ele.id===editSelection)
                 if(user){
                     const content = {
@@ -243,7 +266,7 @@ export const Staff = () => {
                             <ul>
                                 {users?.map((ele,i)=>{
                                     if(selection.includes(ele.id)){
-                                        return <li key={"ul-"+ele.id}>{"#"+ele.id+"   "+ele.name}</li>
+                                        return <li key={"ul-"+ele.id}>{"#"+(ele.id===129?'33':ele.id) + (ele.id < 10?"\t\t":ele.id < 100?"\t\t":"\t") + ele.name}</li>
                                     }
                                     return null
                                 })}

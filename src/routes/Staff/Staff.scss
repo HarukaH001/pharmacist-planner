@@ -31,9 +31,12 @@
             }
             .content-text-2{
                 padding: 0 0 1rem 2rem;
-                text-align: center;
+                text-align: left;
                 max-height: 150px;
                 overflow-y: auto;
+                li{
+                    white-space: pre;
+                }
             }
 
             .cancel-btn{
