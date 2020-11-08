@@ -56,9 +56,9 @@ export const Staff = () => {
         fetchAll()
     },[])
 
-    useEffect(()=>{
-        console.log(users)
-    },[users])
+    // useEffect(()=>{
+    //     console.log(users)
+    // },[users])
 
     useEffect(() =>{
         clearFormState()
