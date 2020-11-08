@@ -4,6 +4,7 @@ import './Staff.scss';
 import { Button, Col, Row, Form } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import axios from 'axios'
+const base_url = "https://266f9c25a1bb.ap.ngrok.io/pharmacy"
 
 export const Staff = () => {
     const [cPreg, setCPreg] = useState(false)
@@ -23,7 +24,6 @@ export const Staff = () => {
     const formRef = useRef()
     // const history = useHistory()
     const [users, setUsers] = useState([])
-    const base_url = "https://266f9c25a1bb.ap.ngrok.io/pharmacy"
 
 
     useEffect(()=>{

@@ -3,6 +3,8 @@ import './Calendar.scss';
 import Table from 'react-bootstrap/Table'
 import { Col, Row } from 'react-bootstrap'
 // import { Link, useLocation, useHistory } from 'react-router-dom';
+import axios from 'axios'
+const base_url = "https://266f9c25a1bb.ap.ngrok.io/planner"
 
 export const Calendar = () => {
     const [selectedMonth, setSelectedMonth] = useState(formatMonth((new Date()).toISOString().substring(0, 7)))
@@ -10,6 +12,8 @@ export const Calendar = () => {
     const [picker, showPicker] = useState(false)
     const pickerRef = useRef()
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const [contents, setContents] = useState()
+    const [days, setDays] = useState()
     
     useEffect(()=>{
         let target = ''
@@ -31,26 +35,49 @@ export const Calendar = () => {
     },[])
 
     useEffect(()=>{
+        console.log(contents)
+    },[contents])
+
+    useEffect(()=>{
         if(!picker && selectedMonth !== lastSelected){
-            let date = new Date()
-            let [mm, yyyy] = selectedMonth.split('/')
-            date.setMonth(mm-1)
-            date.setFullYear(yyyy)
-            console.log('fetch data of ' + (date.toISOString()))
+            const [mm, yyyy] = selectedMonth.split('/')
+            console.log('fetch data of ' + selectedMonth)
+            console.log('the days in this month of this year is ' + daysInMonth(mm,yyyy))
+            setDays(daysInMonth(mm,yyyy))
+            fetch()
             setLastSelected(selectedMonth)
         }
         // eslint-disable-next-line
     },[picker])
+
+    async function fetch(){
+        let res = await axios.get(base_url+'/month?did='+selectedMonth)
+        let data = Object.entries(res.data).map((ele)=>{
+            return {
+                name: ele[0],
+                schedule: ele[1]
+            }
+        })
+        setContents(data)
+    }   
 
     function formatMonth(date) {
         const [yyyy, mm] = date.split('-')
         return mm + '/' + yyyy
     }
 
+    function daysInMonth (month, year) {
+        let date = new Date()
+        date.setFullYear(year)
+        date.setMonth(month)
+        date.setDate(0)
+        return date.getDate();
+    }
+
     function renderTableHead() {
         let ar = []
-
-        for (let i = 0; i < 31; i++) {
+        
+        for (let i = 0; i < days; i++) {
             ar[i] = i + 1
         }
 
@@ -63,47 +90,55 @@ export const Calendar = () => {
         })
     }
 
-    function renderTableBody() {
+    function renderTableBody(schedule, inside) {
         let ar = []
 
-        for (let i = 0; i < 31; i++) {
+        for (let i = 0; i <= days; i++) {
             ar[i] = i + 1
         }
 
         return ar.map((ele, i) => {
-            return (
+            let assigned = inside ? (schedule[i]===true ? "y" : "x") : (schedule[i]===false ? "y" : 'x')
+
+            return i!==0 && (
                 <td className="stat-td noselect" key={"h" + ele}>
-                    x
+                    {assigned}
                 </td>
             )
         })
     }
 
     function renderUserTable() {
-        let ar = []
-        const count = 13
-        for (let i = 0; i < count*2; i++) {
-            ar[i] = i + 1
-        }
-
-        return ar.map((ele, i) => {
-            if(i%2 === 0){
-                return (
-                    <tr key={"r1-"+i}>
-                        <td className="name-td add-line" colSpan="2" rowSpan="2">วรุณนาโศรก</td>
-                        <td className="name-sec-td noselect">นอก</td>
-                        {renderTableBody()}
-                    </tr>
-                )
-            } else {
-                return (
-                    <tr key={"r2-"+i} className="add-line">
-                        <td className="name-sec-td noselect">ใน</td>
-                        {renderTableBody()}
-                    </tr>
-                )
+        if(contents){
+            let ar = []
+            const count = contents.length
+            for (let i = 0; i < count*2; i++) {
+                ar[i] = i + 1
             }
-        })
+
+            return ar.map((ele, i) => {
+                if(i%2 === 0){
+                    const index = Math.floor(i/2)
+                    const fname = contents[index].name.split(' ')[0]
+
+                    return (
+                        <tr key={"r1-"+i}>
+                            <td className="name-td add-line" colSpan="2" rowSpan="2">{fname}</td>
+                            <td className="name-sec-td noselect">นอก</td>
+                            {renderTableBody(contents[index].schedule, false)}
+                        </tr>
+                    )
+                } else {
+                    const index = Math.floor(i/2)
+                    return (
+                        <tr key={"r2-"+i} className="add-line">
+                            <td className="name-sec-td noselect">ใน</td>
+                            {renderTableBody(contents[index].schedule, true)}
+                        </tr>
+                    )
+                }
+            })
+        }
     }
 
     function renderMonthPicker(){
