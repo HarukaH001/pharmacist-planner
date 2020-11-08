@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Calendar.scss';
 import Table from 'react-bootstrap/Table'
-import { Col, Row, Form } from 'react-bootstrap'
-import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
+import { Col, Row } from 'react-bootstrap'
 // import { Link, useLocation, useHistory } from 'react-router-dom';
 
 export const Calendar = () => {
@@ -12,13 +11,24 @@ export const Calendar = () => {
     const pickerRef = useRef()
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     
-
-    window.onclick = (e) => {
-        e.preventDefault()
-        if (!e.target.classList.contains('pick')) {
-            showPicker(false)
+    useEffect(()=>{
+        let target = ''
+        window.onmousedown = (e) => {
+            target = e.target.classList
         }
-    }
+    
+        window.onmouseup = (e) => {
+            if (!e.target.classList.contains('pick') && e.target.classList === target) {
+                showPicker(false)
+            }
+        }
+
+        return ()=>{
+            window.onmousedown = null
+            window.onmouseup = null
+        }
+        // eslint-disable-next-line
+    },[])
 
     useEffect(()=>{
         if(!picker && selectedMonth !== lastSelected){
@@ -29,6 +39,7 @@ export const Calendar = () => {
             console.log('fetch data of ' + (date.toISOString()))
             setLastSelected(selectedMonth)
         }
+        // eslint-disable-next-line
     },[picker])
 
     function formatMonth(date) {

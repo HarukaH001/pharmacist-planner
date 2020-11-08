@@ -22,7 +22,7 @@ const App = () => {
     <div className="App">
       <Router>
         <div className="side-bar">
-          <Link to="/calendar"  onClick={()=>setPath('calendar')} className="title noselect">Project Name</Link>
+          <Link to="/calendar"  onClick={()=>setPath('calendar')} className="title noselect">Scheduler</Link>
           <div className="toolbar">
             <Link to="/calendar" onClick={()=>setPath('calendar')} style={{textDecoration:'none'}}>
               <Button variant={path==='calendar'?"primary":"light"} size="sm" block className="nofocus" style={path==='calendar'?{}:{backgroundColor:'white', border:'none'}}>

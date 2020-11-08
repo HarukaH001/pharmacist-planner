@@ -27,6 +27,13 @@
             .content-text{
                 padding: 0 0 1rem 2rem;
                 text-align: center;
+                
+            }
+            .content-text-2{
+                padding: 0 0 1rem 2rem;
+                text-align: center;
+                max-height: 150px;
+                overflow-y: auto;
             }
 
             .cancel-btn{
@@ -179,6 +186,7 @@
                 .selection-box{
                     padding: 0.6rem 0.5rem 0.6rem 0.5rem;
                     width: 35px;
+                    cursor: pointer;
                 }
 
                 .s{
@@ -194,6 +202,11 @@
                 .name-td{
                     padding: 0.6rem 0 0.6rem 1rem;
                     width: 30%;
+
+                    &.btn-mode:hover{
+                        cursor: pointer;
+                        border-bottom: 2.5px solid #3c69ff;
+                    }
                 }
                 .age-td{
                     padding: 0.6rem 0 0.6rem 1rem;
@@ -244,6 +257,13 @@
                 .selection-box{
                     padding: 0.6rem 0.5rem 0.6rem 0.5rem;
                     width: 35px;
+                    cursor: pointer;
+                }
+
+                .s{
+                    &:hover{
+                        border-bottom: 2.5px solid #ff3c3c;
+                    }
                 }
 
                 .tag-th{

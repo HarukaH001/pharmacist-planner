@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
+    "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "bootstrap-icons": "^1.1.0",
     "jquery": "^3.5.1",
@@ -23,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "demo": "ngrok http 3000 -region ap"
   },
   "eslintConfig": {
     "extends": [
