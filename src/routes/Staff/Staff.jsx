@@ -51,7 +51,7 @@ export const Staff = () => {
     useEffect(()=>{
         async function fetchAll(){
             let res = await axios.get(base_url + "/all")
-            setUsers(res?.data?res.data:[])
+            setUsers(res?.data?res.data.sort((a,b)=>a.id-b.id):[])
         }
         fetchAll()
     },[])
@@ -168,7 +168,7 @@ export const Staff = () => {
                     }
                     let newData = await axios.put(base_url,content)
                     if(newData?.data){
-                        setUsers(newData.data)
+                        setUsers(newData.data.sort((a,b)=>a.id-b.id))
                     }
                 }
             }
