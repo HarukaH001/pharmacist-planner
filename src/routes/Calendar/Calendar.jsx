@@ -36,9 +36,9 @@ export const Calendar = () => {
         // eslint-disable-next-line
     },[])
 
-    useEffect(()=>{
-        console.log(contents)
-    },[contents])
+    // useEffect(()=>{
+    //     console.log(contents)
+    // },[contents])
 
     useEffect(()=>{
         if(!picker && selectedMonth !== lastSelected){
@@ -105,7 +105,7 @@ export const Calendar = () => {
             let assigned = inside ? (schedule[i]?.isIN===true ? schedule[i].detail : "-") : (schedule[i]?.isIN===false ? schedule[i].detail : '-')
 
             return i!==0 && (
-                <td className={"stat-td noselect" + (assigned==="ช"?" highlight-y":assigned==="บ"?" highlight-g":assigned==="ด"?" highlight-b":assigned==="ย"?" highlight-r":highlight?" highlight":"")} key={"h" + ele}>
+                <td className={"stat-td noselect" + (assigned==="ช"?" highlight-y":assigned==="บ"?" highlight-g":assigned==="ด"?" highlight-b":assigned==="ย"?" highlight-r":i%2===1?highlight?" highlight":"":highlight?" higherlight":" coverlight")} key={"h" + ele}>
                     {assigned}
                 </td>
             )
