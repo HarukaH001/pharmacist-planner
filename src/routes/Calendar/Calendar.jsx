@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Calendar.scss';
 import Table from 'react-bootstrap/Table'
+import Spinner from 'react-bootstrap/Spinner'
 import { Col, Row } from 'react-bootstrap'
 // import { Link, useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios'
-const base_url = "https://266f9c25a1bb.ap.ngrok.io/planner"
+const base_url = "https://465a4bc0e06e.ap.ngrok.io/planner"
 
 export const Calendar = () => {
     const [selectedMonth, setSelectedMonth] = useState(formatMonth((new Date()).toISOString().substring(0, 7)))
@@ -14,6 +15,7 @@ export const Calendar = () => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const [contents, setContents] = useState()
     const [days, setDays] = useState()
+    const [loaded, setLoaded] = useState(false)
     
     useEffect(()=>{
         let target = ''
@@ -51,6 +53,7 @@ export const Calendar = () => {
     },[picker])
 
     async function fetch(){
+        setLoaded(false)
         let res = await axios.get(base_url+'/month?did='+selectedMonth)
         let data = Object.entries(res.data).map((ele)=>{
             return {
@@ -59,6 +62,7 @@ export const Calendar = () => {
             }
         })
         setContents(data)
+        setLoaded(true)
     }   
 
     function formatMonth(date) {
@@ -90,7 +94,7 @@ export const Calendar = () => {
         })
     }
 
-    function renderTableBody(schedule, inside) {
+    function renderTableBody(schedule, inside, highlight) {
         let ar = []
 
         for (let i = 0; i <= days; i++) {
@@ -98,10 +102,10 @@ export const Calendar = () => {
         }
 
         return ar.map((ele, i) => {
-            let assigned = inside ? (schedule[i]===true ? "y" : "x") : (schedule[i]===false ? "y" : 'x')
+            let assigned = inside ? (schedule[i]?.isIN===true ? schedule[i].detail : "-") : (schedule[i]?.isIN===false ? schedule[i].detail : '-')
 
             return i!==0 && (
-                <td className="stat-td noselect" key={"h" + ele}>
+                <td className={"stat-td noselect" + (assigned==="ช"?" highlight-y":assigned==="บ"?" highlight-g":assigned==="ด"?" highlight-b":assigned==="ย"?" highlight-r":highlight?" highlight":"")} key={"h" + ele}>
                     {assigned}
                 </td>
             )
@@ -123,9 +127,9 @@ export const Calendar = () => {
 
                     return (
                         <tr key={"r1-"+i}>
-                            <td className="name-td add-line" colSpan="2" rowSpan="2">{fname}</td>
+                            <td className={"name-td add-line" + (index%2===0?" highlight":"")} colSpan="2" rowSpan="2">{fname}</td>
                             <td className="name-sec-td noselect">นอก</td>
-                            {renderTableBody(contents[index].schedule, false)}
+                            {renderTableBody(contents[index].schedule, false,index%2===0)}
                         </tr>
                     )
                 } else {
@@ -133,7 +137,7 @@ export const Calendar = () => {
                     return (
                         <tr key={"r2-"+i} className="add-line">
                             <td className="name-sec-td noselect">ใน</td>
-                            {renderTableBody(contents[index].schedule, true)}
+                            {renderTableBody(contents[index].schedule, true,index%2===0)}
                         </tr>
                     )
                 }
@@ -233,17 +237,21 @@ export const Calendar = () => {
                 </div>
 
                 <div className="wrapper">
-                    <Table striped bordered hover className="edit-table">
-                        <thead>
-                            <tr>
-                                <th className="name-th" colSpan="3">ชื่อ</th>
-                                {renderTableHead()}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {renderUserTable()}
-                        </tbody>
-                    </Table>
+                    { loaded?
+                        <Table striped bordered hover className="edit-table">
+                            <thead>
+                                <tr>
+                                    <th className="name-th" colSpan="3">ชื่อ</th>
+                                    {renderTableHead()}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {renderUserTable()}
+                            </tbody>
+                        </Table>
+                        :
+                        <Spinner animation="grow" variant="primary"/>
+                    }
                 </div>
 
                 {/* <div className="wrapper-012"></div> */}

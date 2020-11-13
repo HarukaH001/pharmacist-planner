@@ -192,6 +192,22 @@
                 display: none;
             }
             // background-color: teal;
+            .spinner-grow{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+            }
+            @keyframes spinner-grow {
+                0% {
+                    -webkit-transform: scale(0);
+                    transform: scale(0);
+                }
+                50% {
+                    opacity: 1; 
+                    -webkit-transform: scale(1.5);
+                    transform: scale(1.5);
+                }
+            }
             
             Table{ 
                 background-color: #f5f5f5;
@@ -239,6 +255,9 @@
                     white-space: nowrap;
                     overflow: hidden;
                     background-color: #F5F5F5;
+                    &.highlight{
+                        background-color: rgb(240, 240, 240);
+                    }
                 }
 
                 .name-sec-td{
@@ -255,10 +274,29 @@
                     padding-bottom: 0.4rem;
                     text-align: center;
                     background-color: #f5f5f5;
+                    &.highlight-y{
+                        background-color: rgb(255, 255, 212);
+                        font-weight: 600;
+                    }
+                    &.highlight-g{
+                        background-color: rgb(175, 255, 175);
+                        font-weight: 600;
+                    }
+                    &.highlight-b{
+                        background-color: rgb(175, 212, 255);
+                        font-weight: 600;
+                    }
+                    &.highlight-r{
+                        background-color: rgb(248, 200, 200);
+                        font-weight: 600;
+                    }
+                    &.highlight{
+                        background-color: rgb(240, 240, 240);
+                    }
                 }
 
                 .add-line{
-                    border-bottom: 1.5px solid #c5c8cc;
+                    border-bottom: 2px solid #d9dde6;
                 }
             }
         }

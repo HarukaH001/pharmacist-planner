@@ -3,8 +3,9 @@ import './Staff.scss';
 // import { Link, useLocation, useHistory } from 'react-router-dom';
 import { Button, Col, Row, Form } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
+import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
-const base_url = "https://266f9c25a1bb.ap.ngrok.io/pharmacy"
+const base_url = "https://465a4bc0e06e.ap.ngrok.io/pharmacy"
 
 export const Staff = () => {
     const [cPreg, setCPreg] = useState(false)
@@ -24,6 +25,7 @@ export const Staff = () => {
     const formRef = useRef()
     // const history = useHistory()
     const [users, setUsers] = useState([])
+    const [loaded, setLoaded] = useState(false)
 
 
     useEffect(()=>{
@@ -50,8 +52,11 @@ export const Staff = () => {
 
     useEffect(()=>{
         async function fetchAll(){
+            setLoaded(false)
+            await new Promise(resolve=>setTimeout(resolve,2000))
             let res = await axios.get(base_url + "/all")
             setUsers(res?.data?res.data.sort((a,b)=>a.id-b.id):[])
+            setLoaded(true)
         }
         fetchAll()
     },[])
@@ -453,25 +458,29 @@ export const Staff = () => {
                 </div>
 
                 <div className="wrapper">
-                    <Table borderless hover className="edit-table">
-                        <thead className="noselect">
-                            <tr>
-                                {eFormMode ? (
-                                <th className="selection-box"></th>
-                                ) : null}
-                                <th className="tag-td">#</th>
-                                <th className="name-td">ชื่อ</th>
-                                <th className="age-td">อายุ</th>
-                                <th className="can-td">มะเร็ง</th>
-                                <th className="nut-td">สารอาหาร</th>
-                                <th className="preg-td">ตั้งครรภ์</th>
-                                <th className="tel-td">เบอร์โทร</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {renderUserTable()}
-                        </tbody>
-                    </Table>
+                    { loaded?
+                        <Table borderless hover className="edit-table">
+                            <thead className="noselect">
+                                <tr>
+                                    {eFormMode ? (
+                                    <th className="selection-box"></th>
+                                    ) : null}
+                                    <th className="tag-td">#</th>
+                                    <th className="name-td">ชื่อ</th>
+                                    <th className="age-td">อายุ</th>
+                                    <th className="can-td">มะเร็ง</th>
+                                    <th className="nut-td">สารอาหาร</th>
+                                    <th className="preg-td">ตั้งครรภ์</th>
+                                    <th className="tel-td">เบอร์โทร</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {renderUserTable()}
+                            </tbody>
+                        </Table>
+                        :
+                        <Spinner animation="grow" variant="primary"/>
+                    }
                 </div>
             </div>
         </div>
