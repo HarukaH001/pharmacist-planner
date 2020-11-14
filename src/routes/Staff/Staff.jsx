@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Staff.scss';
-// import { Link, useLocation, useHistory } from 'react-router-dom';
 import { Button, Col, Row, Form } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
-const base_url = "https://465a4bc0e06e.ap.ngrok.io/pharmacy"
 
 export const Staff = () => {
     const [cPreg, setCPreg] = useState(false)
@@ -26,7 +24,7 @@ export const Staff = () => {
     // const history = useHistory()
     const [users, setUsers] = useState([])
     const [loaded, setLoaded] = useState(false)
-
+    const base_url = window.api + "/pharmacy"
 
     useEffect(()=>{
         let target = ''

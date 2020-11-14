@@ -3,9 +3,7 @@ import './Calendar.scss';
 import Table from 'react-bootstrap/Table'
 import Spinner from 'react-bootstrap/Spinner'
 import { Col, Row } from 'react-bootstrap'
-// import { Link, useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios'
-const base_url = "https://465a4bc0e06e.ap.ngrok.io/planner"
 
 export const Calendar = () => {
     const [selectedMonth, setSelectedMonth] = useState(formatMonth((new Date()).toISOString().substring(0, 7)))
@@ -16,6 +14,7 @@ export const Calendar = () => {
     const [contents, setContents] = useState()
     const [days, setDays] = useState()
     const [loaded, setLoaded] = useState(false)
+    const base_url = window.api + "/planner"
     
     useEffect(()=>{
         let target = ''
