@@ -53,7 +53,6 @@ export const Staff = () => {
     useEffect(()=>{
         async function fetchAll(){
             setLoaded(false)
-            await new Promise(resolve=>setTimeout(resolve,2000))
             let res = await axios.get(base_url + "/all")
             setUsers(res?.data?res.data.sort((a,b)=>a.id-b.id):[])
             setLoaded(true)
