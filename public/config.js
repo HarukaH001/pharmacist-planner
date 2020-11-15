@@ -1,1 +1,1 @@
-window.api = "https://15615a820234.ap.ngrok.io"
+window.api = "https://71329ef0d934.ap.ngrok.io"
