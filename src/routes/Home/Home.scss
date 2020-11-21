@@ -4,8 +4,71 @@
     height: 100%;
     background-color:#F5F5F5;
 
-    .container{
-        margin-top: 4%;
-        padding: 0;
+    .home-container{
+        padding: 4% 4% 4% 4%;
+        width: 100%;
+        height: 100%;
+        
+        .wrapper{
+            width: 100%;
+            height: 100%;
+            
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+            &::-webkit-scrollbar{
+                display: none;
+            }
+
+            .home-content-container{
+                width: 100%;
+                height: 100%;
+
+                .left-panel{
+                    position: relative;
+                    float: left;
+                    background-color: coral;
+                    width: 70%;
+                    height: 100%;
+
+                    .hospital-title{
+                        height: 15%;
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: fit-content;
+                        padding: 10px 0 10px 0;
+                        img{
+                            float: left;
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+                        .hospital-title-name{
+                            height: 100%;
+                            float: left;
+                        }
+                    }
+                    
+                    .hospital-photo{
+                        height: 85%;
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: fit-content;
+                        img{
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+                    }
+                }
+                .right-panel{
+                    position: relative;
+                    float: left;
+                    background-color: crimson;
+                    width: 30%;
+                    height: 100%;
+                    padding-left: 4%;
+                }
+            }
+        }
     }
 }

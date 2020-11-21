@@ -16,6 +16,8 @@
             width: 135px;
             height: 37px;
             left: 2%;
+            font-size: 1.3rem;
+            padding-top: 0.1rem;
 
             &.nofocus:focus{
                 outline: none;
@@ -47,6 +49,7 @@
                 border-bottom-left-radius: 5px;
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
+                font-size: 1.5rem;
             }
             .calendar-btn{
                 float: right;
@@ -86,7 +89,7 @@
                     border-radius: 5px;
 
                     .c-row{
-                        font-size: larger;
+                        font-size: x-large;
                         .c-col{
                             padding-top: 0.1rem;
                             padding-bottom: 0.2rem;
@@ -128,7 +131,7 @@
                     }
 
                     .d-row{
-                        font-size: large;
+                        font-size: x-large;
                         .d-col{
                             padding-top: 0.1rem;
                             padding-bottom: 0.1rem;
@@ -232,10 +235,10 @@
                 color: #373A3C;
                 table-layout: fixed;
                 @media only screen and (max-width: 1024px){
-                    font-size: 0.6rem;
+                    font-size: 0.7rem;
                 }
                 @media only screen and (min-width: 1025px){
-                    font-size: 0.9rem;
+                    font-size: 1.0rem;
                 }
                 overflow: hidden;
                 width: 100%;
@@ -251,10 +254,11 @@
                 .name-th{
                     padding: 0rem;
                     padding-top: 0.4rem;
-                    padding-bottom: 0.4rem;
+                    padding-bottom: 0.3rem;
                     width: 12%;
                     text-align: center;
                     color:  #f5f5f5;
+                    font-size: 1.3rem;
                 }
 
                 .date-th{
@@ -339,10 +343,10 @@
                 color: #373A3C;
                 table-layout: fixed;
                 @media only screen and (max-width: 1024px){
-                    font-size: 0.6rem;
+                    font-size: 0.7rem;
                 }
                 @media only screen and (min-width: 1025px){
-                    font-size: 0.9rem;
+                    font-size: 1.0rem;
                 }
                 overflow: hidden;
                 width: 100%;
@@ -350,9 +354,10 @@
                 .name-th{
                     padding: 0rem;
                     padding-top: 0.4rem;
-                    padding-bottom: 0.4rem;
+                    padding-bottom: 0.3rem;
                     width: 12%;
                     text-align: center;
+                    font-size: 1.2rem;
                 }
 
                 .date-th{

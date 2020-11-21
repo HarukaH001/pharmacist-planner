@@ -7,12 +7,18 @@ import { Button } from 'react-bootstrap'
 const App = () => {
   const [path, setPath] = useState()
 
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-  window.addEventListener('resize', () => {
+  useEffect(() => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-  })
+    window.addEventListener('resize', () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    })
+
+    return () => {
+      window.removeEventListener('resize')
+    }
+  }, [])
 
   useEffect(() => {
     setPath((window.location.pathname.substring(1, window.location.pathname.length)))
