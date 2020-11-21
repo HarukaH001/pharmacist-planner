@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
-import { Calendar, Staff } from './routes';
+import { Home, Calendar, Staff, Pharmacist } from './routes';
 import { Button } from 'react-bootstrap'
 
 const App = () => {
@@ -87,9 +87,11 @@ const App = () => {
         <div className="top-bar"></div>
         <div className="content-container">
           <Switch>
+            <Route exact path="/home"><Home /></Route>
             <Route exact path="/calendar"><Calendar /></Route>
-            <Route exact path="/"><Redirect to="/calendar" /></Route>
+            <Route exact path="/"><Redirect to="/home" /></Route>
             <Route exact path="/staff"><Staff /></Route>
+            <Route exact path="/pharmacist"><Pharmacist /></Route>
           </Switch>
         </div>
       </Router>
