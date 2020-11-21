@@ -13,8 +13,9 @@ export const Home = () => {
                         <div className="left-panel">
                             <div className="hospital-title">
                                 <img src={hospitalLogo} alt="โรงพยาบาลพระปกเกล้า จังหวัดจันทบุรี"/>
-                                <div className="hospital-title-name">
-                                    <h5>โรงพยาบาลพระปกเกล้า จังหวัดจันทบุรี</h5>
+                                <div className="hospital-thai-name">
+                                    โรงพยาบาลพระปกเกล้า จังหวัดจันทบุรี
+                                    <div className="hospital-eng-name">Papokklao Hospital</div>
                                 </div>
                             </div>
                             <div className="hospital-photo">
