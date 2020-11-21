@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Calendar.scss';
 import Table from 'react-bootstrap/Table'
 import Spinner from 'react-bootstrap/Spinner'
-import { Col, Row } from 'react-bootstrap'
+import { Button, Col, Row } from 'react-bootstrap'
 import axios from 'axios'
 
 export const Calendar = () => {
@@ -223,6 +223,10 @@ export const Calendar = () => {
                         {renderMonthPicker()}
                     </div>:null}
                 </div>
+
+                <Button variant="primary" className="reschedule noselect nofocus" block>
+                    Reschedule
+                </Button>
 
                 <div className="wrapper-0">
                     <Table striped bordered hover>
