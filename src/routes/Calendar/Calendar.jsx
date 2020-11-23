@@ -67,8 +67,7 @@ export const Calendar = () => {
     async function reschedule(){
         setLoaded(false)
         let now = new Date()
-        let res = await axios.get(window.api+'/pharmacy/generate_planner?year='+ now.getFullYear() + "&month=" + (now.getMonth()+1) + "&day=" + now.getDate() + "&add=true")
-        // console.log(res)
+        await axios.get(window.api+'/pharmacy/generate_planner?year='+ now.getFullYear() + "&month=" + (now.getMonth()+1) + "&day=" + now.getDate() + "&add=true")
         await new Promise(resolve=>setTimeout(resolve, 3000))
         await fetch()
         setLoaded(true)
