@@ -11,22 +11,42 @@
         height: 92%;
         padding: 0;
 
-        .reschedule{
+        .left-btn-group{
             position: absolute;
-            width: 135px;
+            width: fit-content;
             height: 37px;
             left: 2%;
-            font-size: 1.3rem;
-            padding-top: 0.1rem;
 
-            &.nofocus:focus{
-                outline: none;
-                box-shadow: none;
-                background-color: #007bff;
-                border-color: #007bff;
+            .reload{
+                font-size: 1.3rem;
+                float: left;
+                margin: 0 10px 0 20px;
+                padding: 0;
+                height: 37px;
+                width: 37px;
+
+                &.nofocus:focus{
+                    outline: none;
+                    box-shadow: none;
+                }
             }
-            &.nofocus:hover{
-                background-color:#0065d1;
+
+            .reschedule{
+                font-size: 1.3rem;
+                float: left;
+                width: 135px;
+                height: 37px;
+                padding-top: 0.1rem;
+
+                &.nofocus:focus{
+                    outline: none;
+                    box-shadow: none;
+                    background-color: #007bff;
+                    border-color: #007bff;
+                }
+                &.nofocus:hover{
+                    background-color:#0065d1;
+                }
             }
         }
 

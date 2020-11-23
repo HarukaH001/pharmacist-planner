@@ -4,6 +4,7 @@ import { Button, Col, Row, Form } from 'react-bootstrap'
 import Table from 'react-bootstrap/Table'
 import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
+import { isMobile } from 'react-device-detect'
 
 export const Staff = () => {
     const [cPreg, setCPreg] = useState(false)
@@ -275,7 +276,7 @@ export const Staff = () => {
                                 })}
                             </ul>
                         </Row>}
-                        <Row>
+                        <Row style={!isMobile?{padding:'1.5rem 1.5rem 1.5rem 0'}:{}}>
                             <Col xs={6}></Col>
                             <Col><Button className="cancel-btn" variant="light" onClick={()=>{showDForm(false)}} disabled={loading}>Cancel</Button></Col>
                             <Col><Button className="submit-btn" variant="danger" onClick={confirmDelete} disabled={loading}>{loading?(

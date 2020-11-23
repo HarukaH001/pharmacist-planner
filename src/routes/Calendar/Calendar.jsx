@@ -64,6 +64,24 @@ export const Calendar = () => {
         setLoaded(true)
     }   
 
+    async function reschedule(){
+        setLoaded(false)
+        let now = new Date()
+        let res = await axios.get(window.api+'/pharmacy/generate_planner?year='+ now.getFullYear() + "&month=" + (now.getMonth()+1) + "&day=" + now.getDate() + "&add=true")
+        // console.log(res)
+        await new Promise(resolve=>setTimeout(resolve, 3000))
+        await fetch()
+        setLoaded(true)
+    }   
+
+    function rescheduleHandler(){
+        reschedule()
+    }
+
+    function reloadHandler(){
+        fetch();
+    }
+
     function formatMonth(date) {
         const [yyyy, mm] = date.split('-')
         return mm + '/' + yyyy
@@ -224,9 +242,18 @@ export const Calendar = () => {
                     </div>:null}
                 </div>
 
-                <Button variant="primary" className="reschedule noselect nofocus" block>
-                    Reschedule
-                </Button>
+                <div className="left-btn-group">
+                    <Button variant="primary" className="reschedule noselect nofocus" block onClick={()=>rescheduleHandler()}>
+                        Reschedule
+                    </Button>
+
+                    <Button variant="outline-secondary" className="reload nofocus" block title="Reload" onClick={()=>reloadHandler()}>
+                        <svg width="1em" height="1em" viewBox="0 0.75 16 16" className="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                        </svg>
+                    </Button>
+                </div>
 
                 <div className="wrapper-0">
                     <Table striped bordered hover>
