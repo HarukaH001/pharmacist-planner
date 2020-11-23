@@ -13,15 +13,15 @@ export const Home = () => {
                     <div className="home-content-container">
                         <div className="left-panel">
                             <div className="hospital-title">
-                                <div className="logo-wrapper">
+                                <div className="logo-wrapper noselect">
                                     <img src={hospitalLogo} alt="โรงพยาบาลพระปกเกล้า จังหวัดจันทบุรี" />
                                 </div>
-                                <div className="hospital-thai-name">
+                                <div className="hospital-thai-name noselect">
                                     โรงพยาบาลพระปกเกล้า จังหวัดจันทบุรี
-                                    <div className="hospital-eng-name">Papokklao Hospital</div>
+                                    <div className="hospital-eng-name noselect">Papokklao Hospital</div>
                                 </div>
                             </div>
-                            <div className="hospital-photo">
+                            <div className="hospital-photo noselect">
                                 <img src={hospitalImage} alt="โรงพยาบาลพระปกเกล้า จังหวัดจันทบุรี" />
                             </div>
                         </div>
@@ -37,7 +37,7 @@ export const Home = () => {
                                 </div>
                             </div>
                             <div className="info-contact">
-                                <div className="info-contact-header">ติดต่อ</div>
+                                <div className="info-contact-header noselect">ติดต่อ</div>
                                 <div className="info-contact-name">โรงพยาบาลพระปกเกล้า</div>
                                 <Row className="location-contact">
                                     <Col sm={1}>

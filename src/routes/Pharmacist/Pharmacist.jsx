@@ -141,7 +141,7 @@ export const Pharmacist = () => {
     }  
 
     return (
-        <div className="Pharmacist">
+        <div className="Pharmacist noselect">
             <div className="container">
                 {!loaded && <Spinner animation="grow" variant="primary"/>}
                 <div className="left">

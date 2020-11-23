@@ -250,6 +250,10 @@
                 .name-td{
                     padding: 0.6rem 0 0.6rem 1rem;
                     width: 30%;
+                    
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
 
                     &.btn-mode:hover{
                         cursor: pointer;
