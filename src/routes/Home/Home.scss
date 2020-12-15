@@ -6,7 +6,7 @@
 
     .home-container{
         padding: 2% 4% 2% 4%;
-        width: 100%;
+        // width: fit-content;
         height: 100%;
         
         .wrapper{
@@ -24,19 +24,13 @@
             .home-content-container{
                 width: 100%;
                 height: 100%;
+                display: flex;
+                justify-content: center;
 
                 .left-panel{
-                    position: relative;
-                    float: left;
-                    // background-color: coral;
-                    width: 70%;
-                    @media screen and (max-width: 1280px) {
-                        width: 100%;
-                        margin-bottom: 20px;
-                    }
-                    @media screen and (min-height: 960px) and (max-width: 1280px) {
-                        height: calc((100% * 0.6) - 10%);
-                    }
+                    // position: relative;
+                    // float: left;
+                    width: fit-content;
                     height: 100%;
                     display: flex;
                     flex-flow: column;
@@ -48,18 +42,18 @@
                         padding: 0 0 10px 0;
                         margin-left: auto;
                         margin-right: auto;
-                        transform: translateX(-1rem);
+                        // transform: translateX(-1rem);
                         display: flex;
                         align-items: center;
                         .hospital-thai-name{
                             text-align: center;
                             // float: left;
                             color: #2b2b2b;
-                            font-size: 1.5rem; 
+                            font-size: 1.65vw; 
                             .hospital-eng-name{
                                 color: #636363;
                                 margin-top: -15px;
-                                font-size: 1.25rem;
+                                font-size: 1.4vw;
                             }
                         }
                         .logo-wrapper{
@@ -85,58 +79,38 @@
                     }
                 }
                 .right-panel{
-                    position: relative;
-                    float: left;
-                    // background-color: crimson;
+                    // position: relative;
+                    // float: left;
                     width: 30%;
                     height: 100%;
-                    @media screen and (max-width: 1280px) {
-                        width: 100%;
-                        height: fit-content;
-                    }
-                    padding-left: 4%;
+                    padding-left: 40px;
                     display: flex;
-                    @media screen and (max-width: 1280px) {
-                        display: block;
-                        padding-left: 0;
-                    }
                     flex-flow: column;
 
                     .info-header{
-                        font-size: 1.2rem;
-                        @media screen and (max-width: 1280px) and (min-width: 1025px)  {
-                            width: 29%;
-                            float: left;
-                            font-size: 1.4rem;
-                        }
+                        min-height: 40px;
+                        height: fit-content;
+                        font-size: 1.3vw;
+                        line-height: 20px;
                         text-align: center;
-                        margin-bottom: 15px;
+                        margin-bottom: 10px;
                         padding: 5px 10px 5px 10px;
                         background-color: rgb(255, 255, 255);
                         border: 1px solid #6363635d;
                         border-radius: 5px;
                         .info-header-eng{
-                            margin-top: -5px;
-                            font-size: 1rem;
+                            // margin-top: -5px;
+                            font-size: 1.2vw;
                             color: #6363635d;
-                            @media screen and (max-width: 1280px) and (min-width: 1025px)  {
-                                font-size: 1.2rem;
-                            }
                         }
                     }
                     .info-history-header{
-                        font-size: 1.2rem;
-                        @media screen and (max-width: 1280px) {
-                            width: 69%;
-                            min-height: 45%;
-                            height: fit-content;
-                            float: right;
-                            font-size: 1.5rem;
-                        }
+                        // font-size: 1.2vw;
+                        font-size: 2.75vh;
                         flex: 2;
                         font-weight: 600;
-                        margin-bottom: 15px;
-                        padding: 5px 10px 5px 10px;
+                        margin-bottom: 10px;
+                        padding: 5px 15px 5px 15px;
                         background-color: rgb(255, 255, 255);
                         border: 1px solid #6363635d;
                         border-radius: 5px;
@@ -148,67 +122,49 @@
                             display: none;
                         }
                         .info-history-body{
-                            font-size: 0.875rem;
-                            line-height: 15px;
-                            @media screen and (min-width: 1367px) {
-                                font-size: 1.2rem;
-                                line-height: 18px;
+                            // font-size: 1.1vw;
+                            font-size: 2.3vh;
+                            @media screen and (min-width: 1600px){
+                                font-size: 2.4vh
                             }
-                            @media screen and (max-width: 1280px) and (min-width: 1025px)  {
-                                font-size: 1.2rem;
-                                line-height: 25px;
-                            }
+                            line-height: 2.87vh;
                             font-weight: 500;
                             word-wrap: break-word;
                         }
                     }
                     .info-contact{
-                        @media screen and (max-width: 1280px) {
-                            width: 29%;
-                            float: left;
-                        }
                         background-color: rgb(255, 255, 255);
                         border: 1px solid #6363635d;
                         border-radius: 5px;
                         .info-contact-header{
+                            font-size: 1.2vw;
                             text-align: center;
                             background-color: #d1d1d1;
                             border-top-left-radius: 4px;
                             border-top-right-radius: 4px;
-                            @media screen and (max-width: 1280px) and (min-width: 1025px)  {
-                                font-size: 1.2rem;
-                            }
                         }
                         .info-contact-name{
-                            padding: 5px 10px 0 10px;
-                            @media screen and (max-width: 1280px) and (min-width: 1025px)  {
-                                font-size: 1.2rem;
-                                padding: 10px 10px 0 10px;
-                            }
+                            font-size: 1.2vw;
+                            line-height: 2.5vh;
+                            padding: 6px 10px 0 20px;
                         }
                         .location-contact{
-                            font-size: 0.875rem;
-                            padding: 5px 0 0 10px;
+                            line-height: 2.5vh;
+                            font-size: 1.1vw;
+                            padding: 5px 0 0 20px;
                             white-space: pre-wrap;
-                            @media screen and (max-width: 1280px) and (min-width: 1025px)  {
-                                font-size: 1.05rem;
-                            }
                         }
                         .tel-contact{
-                            font-size: 0.875rem;
-                            padding: 5px 0 0 10px;
+                            line-height: 2.5vh;
+                            font-size: 1.1vw;
+                            padding: 5px 0 0 20px;
                             white-space: pre-wrap;
-                            @media screen and (max-width: 1280px) and (min-width: 1025px)  {
-                                font-size: 1.05rem;
-                            }
                         }
                         .email-contact{
-                            font-size: 0.875rem;
-                            padding: 5px 0 5px 10px;
+                            line-height: 2.5vh;
+                            font-size: 1.1vw;
+                            padding: 5px 0 6px 20px;
                             white-space: pre-wrap;
-                            @media screen and (max-width: 1280px) and (min-width: 1025px) {
-                                font-size: 1.05rem;
-                            }
                         }
                     }
                 }
