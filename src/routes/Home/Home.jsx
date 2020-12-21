@@ -3,7 +3,6 @@ import './Home.scss';
 import { Col, Row } from 'react-bootstrap'
 import hospitalImage from '../../assets/hospital-image.svg'
 import hospitalLogo from '../../assets/hospital-logo.png'
-import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse';
 
 export const Home = () => {
 
@@ -19,7 +18,7 @@ export const Home = () => {
                                 </div>
                                 <div className="hospital-thai-name noselect">
                                     โรงพยาบาลพระปกเกล้า จังหวัดจันทบุรี
-                                    <div className="hospital-eng-name noselect">Papokklao Hospital</div>
+                                    <div className="hospital-eng-name noselect">Prapokklao Hospital</div>
                                 </div>
                             </div>
                             <div className="hospital-photo noselect">
