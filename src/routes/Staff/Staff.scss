@@ -70,16 +70,17 @@
             background-color: #F5F5F5;
             border-radius: 5px;
             width: 576px;
-            height: 526px;
+            // height: 526px;
+            height: fit-content;
             padding: 1.75rem 2rem 0rem 0;
             label{
                 text-align: right;
                 font-size: 1.3rem;
             }
-            #name-form, #age-form, #sex-form, #tel-form{
+            #name-form, #age-form, #sex-form, #tel-form, #email-form, #role-form, #skill-form{
                 background-color: white;
                 border-radius: 5px;
-                border-color: white;
+                border-color:#CCCCCC;
                 &:focus{
                     outline: none;
                     box-shadow: none;
@@ -87,7 +88,26 @@
                 font-size: 1.3rem;
             }
 
+            #age-form{
+                width: 50%;
+            }
+
+            #role-form{
+                background-color: #E6E6E6;
+                -webkit-appearance:none;
+                -moz-appearance: none; 
+                -webkit-appearance: none; 
+                appearance: none;
+
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='0.5em' height='1em' viewBox='0 0 16 16' class='bi bi-caret-down-fill' fill='rgb(88, 88, 88)' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3e%3c/svg%3e");
+                background-repeat: no-repeat, repeat !important;
+                background-position: right .7em top 50%, 0 0 !important;
+                background-size: .65em auto, 100% !important;
+            }
+
             #sex-form{
+                background-color: #E6E6E6;
+                width: 50%;
                 -webkit-appearance:none;
                 -moz-appearance: none; 
                 -webkit-appearance: none; 
@@ -139,9 +159,9 @@
         padding: 0;
 
         .add-user-wrapper{
-            width: 96%;
+            width: 92%;
             position: absolute;
-            right: 2%;
+            right: 4%;
             min-height: 35px;
 
             .nofocus:focus{
@@ -170,10 +190,10 @@
         }
         .wrapper{
             position: absolute;
-            left: 2%;
-            width: 96%;
+            left: 4%;
+            width: 92%;
             height: 80%;
-            margin-top: calc(4% + 15px);
+            margin-top: calc(4%);
             overflow-y: scroll;
             z-index: 1;
 
@@ -201,28 +221,30 @@
             }
             
             Table{ 
-                // background-color: #ffffff;
+                background-color: #ffffff;
                 position: absolute;
                 color: #373A3C;
-                table-layout: fixed;
+                // table-layout: fixed;
                 @media only screen and (max-width: 1024px){
                     font-size: 1.0rem;
                 }
                 @media only screen and (min-width: 1025px){
                     font-size: 1.25rem;
                 }
-                overflow: hidden;
                 width: 100%;
                 border: none;
 
-                th:not(.selection-box){
-                    border: none;
-                    background-color:  #f5f5f5;
-                    color:  #f5f5f5;
-                    
+                th{
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
+
+                    position: -webkit-sticky;
+                    position: sticky;
+                    top: 0px;
+                    z-index: 5;
+                    background-color: #ffffff;
+                    box-shadow: 0 1px #C4C4C4
                 }
 
                 .content-row{
@@ -237,15 +259,24 @@
                     cursor: pointer;
                 }
 
+                .ss{
+                    padding: 0.6rem 0.5rem 0.85rem 0.5rem;
+                    &:hover{
+                        padding-bottom: calc(0.95rem - 2.5px);
+                        border-bottom: 2.5px solid #3c69ff;
+                    }
+                }
+
                 .s{
                     &:hover{
+                        padding-bottom: calc(0.6rem - 2.5px);
                         border-bottom: 2.5px solid #3c69ff;
                     }
                 }
 
                 .tag-td{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    width: 7.5%;
+                    width: 5%;
                 }
                 .name-td{
                     padding: 0.6rem 0 0.6rem 1rem;
@@ -264,94 +295,24 @@
                     padding: 0.6rem 0 0.6rem 1rem;
                     width: 7.5%;
                     
-                }.can-td{
+                }
+
+                .can-td{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    
-                }.nut-td{
+                    width: 18%;
+                }
+                .nut-td{
                     padding: 0.6rem 0 0.6rem 1rem;
-                    
-                }.preg-td{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    
-                }.tel-td{
+                    width: 18%;
+                }
+
+                .tel-td{
                     padding: 0.6rem 0 0.6rem 1rem;
                     width: 18%;
                 }
 
                 .add-line{
                     border-bottom: 1.5px solid #e2e5e9;
-                }
-            }
-        }
-
-        .wrapper-0{
-            left: 2%;
-            position: absolute;
-            width: 96%;
-            height: fit-content;
-            margin-top: calc(4% + 15px);
-            z-index: 2;
-            
-            Table{ 
-                background-color: #ffffff;
-                position: absolute;
-                color: #373A3C;
-                table-layout: fixed;
-                @media only screen and (max-width: 1024px){
-                    font-size: 1.0rem;
-                }
-                @media only screen and (min-width: 1025px){
-                    font-size: 1.25rem;
-                }
-                overflow: hidden;
-                width: 100%;
-
-                .selection-box{
-                    padding: 0.6rem 0.5rem 0.6rem 0.5rem;
-                    width: 35px;
-                    cursor: pointer;
-                }
-
-                .s{
-                    &:hover{
-                        border-bottom: 2.5px solid #ff3c3c;
-                    }
-                }
-
-                th:not(.selection-box){
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                }
-
-                .tag-th{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    width: 7.5%;
-                }
-                .name-th{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    width: 30%;
-                }
-                .age-th{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    width: 7.5%;
-                    
-                }.can-th{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    
-                }.nut-th{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    
-                }.preg-th{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    
-                }.tel-th{
-                    padding: 0.6rem 0 0.6rem 1rem;
-                    width: 18%;
-                }
-
-                .add-line{
-                    border-bottom: 1.5px solid #d1d6db;
                 }
             }
         }

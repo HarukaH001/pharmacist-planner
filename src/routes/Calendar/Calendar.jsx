@@ -160,7 +160,7 @@ export const Calendar = () => {
         }
 
         return ar.map((ele, i) => {
-            let assigned = schedule[i]?.detail ? schedule[i].detail.substring(0,1) : "-"
+            let assigned = schedule[i]?.detail ? schedule[i].detail : "-"
             let isHoliday = false
             try{
                 isHoliday = holidays[selectedMonth.split('/')[1]][selectedMonth.split('/')[0]].includes(i)

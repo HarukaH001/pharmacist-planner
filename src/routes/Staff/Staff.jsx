@@ -14,6 +14,8 @@ export const Staff = () => {
     const [cAge, setCAge] = useState()
     const [cSex, setCSex] = useState()
     const [cTel, setCTel] = useState()
+    const [cMail, setCMail] = useState()
+    const [cRole, setCRole] = useState()
     const [form, showForm] = useState(false)
     const [eForm, showEForm] = useState(false)
     const [dForm, showDForm] = useState(false)
@@ -53,7 +55,8 @@ export const Staff = () => {
         async function fetchAll(){
             setLoaded(false)
             let res = await axios.get(base_url + "/all")
-            setUsers(res?.data?res.data.sort((a,b)=>a.id-b.id):[])
+            console.log(res.data)
+            setUsers(res?.data?res.data.sort((a,b)=>a.name-b.name):[])
             setLoaded(true)
         }
         fetchAll()
@@ -233,20 +236,15 @@ export const Staff = () => {
                             </svg>}
                         </td>
                     ) : null}
-                    <td className="tag-td add-line">{ele.id}</td>
+                    <td className="tag-td add-line">{i+1}</td>
                     <td title="คลิกเพื่อแก้ไขข้อมูลผู้ใช้นี้" className={"name-td add-line" + (!eFormMode?" btn-mode":"")} onClick={()=>{if(!eFormMode){selectEdit(ele.id);showEForm(true)}}}>{ele.name.split(' ')[0]}&nbsp;&nbsp;&nbsp;{ele.name.split(' ')[1]}</td>
                     <td className="age-td add-line">{ele.age}</td>
-                    <td className="can-td add-line" style={!ele.cancer?{color: 'transparent'}:{}}>
+                    <td className="can-td add-line" style={ele.cancer?{color: 'transparent'}:{}}>
                         <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" className="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                         </svg>
                     </td>
-                    <td className="nut-td add-line" style={!ele.nutrient?{color: 'transparent'}:{}}>
-                        <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" className="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                        </svg>
-                    </td>
-                    <td className="preg-td add-line" style={!ele.pregnant?{color: 'transparent'}:{}}>
+                    <td className="nut-td add-line" style={ele.nutrient?{color: 'transparent'}:{}}>
                         <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" className="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
                         </svg>
@@ -296,17 +294,16 @@ export const Staff = () => {
                                 ชื่อ
                             </Form.Label>
                             <Col xs={7}>
-                                <Form.Control type="text" onChange={(e)=>setCName(e.target.value)} style={{borderColor:"white"}}/>
+                                <Form.Control type="text" onChange={(e)=>setCName(e.target.value)}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="age-form">
                             <Form.Label column className="noselect">
-                                อายุ
+                                วันเกิด
                             </Form.Label>
                             <Col xs={7}>
-                                <Form.Control type="text" maxLength="3" onChange={(e)=>{
-                                    if(/^\d+$/.test(e.target.value)) setCAge(e.target.value)
-                                    else e.target.value = e.target.value.replace(/[^0-9]/g, "")
+                                <Form.Control type="date" onChange={(e)=>{
+                                    // setCAge(e.target.value)
                                 }}/>
                             </Col>
                         </Form.Group>
@@ -316,10 +313,9 @@ export const Staff = () => {
                             </Form.Label>
                             <Col xs={7}>
                                 <Form.Control as="select" defaultValue="x" className="noselect" onChange={(e)=>setCSex(e.target.value)}>
-                                    <option value="x" disabled>กรุณาเลือก</option>
+                                    <option value="x" disabled>เพศ</option>
                                     <option value="m">ชาย</option>
                                     <option value="f">หญิง</option>
-                                    <option value="o">อื่น ๆ (ไม่ระบุ)</option>
                                 </Form.Control>
                             </Col>
                         </Form.Group>
@@ -331,6 +327,21 @@ export const Staff = () => {
                                 <Form.Control type="text" maxLength="10" onChange={(e)=>{
                                     if(/^\d+$/.test(e.target.value)) setCTel(e.target.value)
                                     else e.target.value = e.target.value.replace(/[^0-9]/g, "")
+                                }}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="email-form">
+                            <Form.Label column className="noselect">
+                                อีเมล
+                            </Form.Label>
+                            <Col xs={7}>
+                                <Form.Control placeholder="example@email.com" type="email" onChange={(e)=>{ // eslint-disable-next-line
+                                    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                                    if(re.test(e.target.value)) {
+                                        setCMail(e.target.value)
+                                    } else {
+                                        setCMail()
+                                    }
                                 }}/>
                             </Col>
                         </Form.Group>
@@ -351,40 +362,30 @@ export const Staff = () => {
                                 )}</div>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} controlId="can-form" >
+
+                        <Form.Group as={Row} controlId="role-form" >
                             <Form.Label column className="noselect">
-                                อบรมด้านการเคมีบำบัด
+                                หน้าที่
                             </Form.Label>
                             <Col xs={7}>
-                                <div className="checkbox-center" onClick={() => setCCan(!cCan)}>{cCan ? (
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-check-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                        <path fillRule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
-                                    </svg>
-                                ) : (
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                    </svg>
-                                )}</div>
+                                <Form.Control as="select" defaultValue="x" className="noselect" onChange={(e)=>setCRole(e.target.value)}>
+                                    <option value="x" disabled>หน้าที่</option>
+                                    <option value="P">เภสัชกร</option>
+                                    <option value="MP">เจ้าพนักงานเภสัชกร</option>
+                                    <option value="O">เจ้าหน้าที่</option>
+                                </Form.Control>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} controlId="nut-form" >
+
+                        <Form.Group as={Row} controlId="skill-form" >
                             <Form.Label column className="noselect">
-                                อบรมด้านการเตรียมอาหาร
+                                ความสามารถ
                             </Form.Label>
                             <Col xs={7}>
-                                <div className="checkbox-center" onClick={() => setCNut(!cNut)}>{cNut ? (
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-check-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                        <path fillRule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
-                                    </svg>
-                                ) : (
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                    </svg>
-                                )}</div>
+                                <Form.Control type="text" disabled value="Helo"/>
                             </Col>
                         </Form.Group>
+                        
                         <Form.Group as={Row} controlId="sub-form">
                             <Col xs={6}></Col>
                             <Col><Button className="cancel-btn" variant="light" onClick={()=>{showEForm(false);showForm(false)}} disabled={loading}>Cancel</Button></Col>
@@ -428,49 +429,29 @@ export const Staff = () => {
                     ) : null}
                 </div>
 
-                <div className="wrapper-0">
-                    <Table borderless hover>
-                        <thead className="noselect add-line">
-                            <tr>
-                                {eFormMode ? (
-                                <th className="selection-box s" onClick={()=>select(selection.length === users?.length?[]:users.map(ele=>ele.id))}>
-                                    {selection.length === users?.length?
-                                    <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-check-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                                    </svg>
-                                    :
-                                    <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                    </svg>}
-                                </th>
-                                ) : null}
-                                <th className="tag-th">#</th>
-                                <th className="name-th">ชื่อ</th>
-                                <th className="age-th">อายุ</th>
-                                <th className="can-th">มะเร็ง</th>
-                                <th className="nut-th">สารอาหาร</th>
-                                <th className="preg-th">ตั้งครรภ์</th>
-                                <th className="tel-th">เบอร์โทร</th>
-                            </tr>
-                        </thead>
-                    </Table>
-                </div>
-
                 <div className="wrapper">
                     { loaded?
                         <Table borderless hover className="edit-table">
-                            <thead className="noselect">
+                            <thead className="noselect add-line">
                                 <tr>
                                     {eFormMode ? (
-                                    <th className="selection-box"></th>
+                                    <th className="selection-box ss" onClick={()=>select(selection.length === users?.length?[]:users.map(ele=>ele.id))}>
+                                        {selection.length === users?.length?
+                                        <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-check-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fillRule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                        </svg>
+                                        :
+                                        <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                        </svg>}
+                                    </th>
                                     ) : null}
-                                    <th className="tag-td">#</th>
-                                    <th className="name-td">ชื่อ</th>
-                                    <th className="age-td">อายุ</th>
-                                    <th className="can-td">มะเร็ง</th>
-                                    <th className="nut-td">สารอาหาร</th>
-                                    <th className="preg-td">ตั้งครรภ์</th>
-                                    <th className="tel-td">เบอร์โทร</th>
+                                    <th className="tag-th">#</th>
+                                    <th className="name-th">ชื่อ</th>
+                                    <th className="age-th">อายุ</th>
+                                    <th className="can-th">ความสามารถ</th>
+                                    <th className="nut-th">ตำแหน่ง</th>
+                                    <th className="tel-th">เบอร์โทร</th>
                                 </tr>
                             </thead>
                             <tbody>
