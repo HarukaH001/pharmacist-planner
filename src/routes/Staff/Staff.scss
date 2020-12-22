@@ -69,14 +69,24 @@
             transform: translate(-50%, -50%);
             background-color: #F5F5F5;
             border-radius: 5px;
-            width: 576px;
+            // width: 576px;
+            width: 558px;
             // height: 526px;
             height: fit-content;
-            padding: 1.75rem 2rem 0rem 0;
+            padding: 1.5rem 0 1.5rem 0;
+            .form-wrapper{
+                width: 450px;
+                margin: auto;
+            }
             label{
                 text-align: right;
                 font-size: 1.3rem;
             }
+
+            .remove-margin{
+                margin-bottom: 0;
+            }
+
             #name-form, #age-form, #sex-form, #tel-form, #email-form, #role-form, #skill-form{
                 background-color: white;
                 border-radius: 5px;
@@ -89,7 +99,29 @@
             }
 
             #age-form{
-                width: 50%;
+                width: 55%;
+                padding: 0 0 0 .7rem;
+                &::-webkit-calendar-picker-indicator { 
+                    background-color: #ECEEEF;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgb(88, 88, 88' class='bi bi-calendar2-date-fill' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zm7.336 9.29c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm.066-2.544c.625 0 1.184-.484 1.184-1.18 0-.832-.527-1.23-1.16-1.23-.586 0-1.168.387-1.168 1.21 0 .817.543 1.2 1.144 1.2zm-2.957-2.89v5.332H5.77v-4.61h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat, repeat !important;
+                    background-position: right .38em top 50%, 0 0 !important;
+                    background-size: 1em auto, 100% !important;
+                    padding: 0;
+                    width: 38px;
+                    height: 43.19px;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+                &.overtext{
+                    width: calc(55% - 54px) !important;
+                    top: 0px;
+                    position: absolute;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    border: 1px solid #CCCCCC;
+                    letter-spacing: 1px;
+                }
             }
 
             #role-form{
@@ -107,7 +139,7 @@
 
             #sex-form{
                 background-color: #E6E6E6;
-                width: 50%;
+                width: 55%;
                 -webkit-appearance:none;
                 -moz-appearance: none; 
                 -webkit-appearance: none; 
