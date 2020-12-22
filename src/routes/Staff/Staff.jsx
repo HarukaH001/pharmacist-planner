@@ -298,7 +298,7 @@ export const Staff = () => {
                                     วันเกิด
                                 </Form.Label>
                                 <Col xs={9}>
-                                    <Form.Control type="date" onChange={(e)=>{
+                                    <Form.Control type="date" min="1900-01-01" max={(new Date()).getFullYear() + '-' + ((new Date()).getMonth()+1) + '-' + (new Date()).getDate()} onChange={(e)=>{
                                         setCAge(e.target.value)
                                     }}/>
                                     
