@@ -57,12 +57,13 @@ export const Calendar = () => {
     async function fetch(){
         setLoaded(false)
         let res = await axios.get(base_url+'/month?did='+selectedMonth)
-        let data = Object.entries(res.data).map((ele)=>{
+        let data = Object.values(res.data).map(ele=>{
             return {
                 name: ele[0],
-                schedule: ele[1]
+                schedule: ele
             }
         })
+        
         console.log(data)
         setContents(data.sort((a,b)=>a.name-b.name))
         setLoaded(true)
@@ -160,7 +161,7 @@ export const Calendar = () => {
         }
 
         return ar.map((ele, i) => {
-            let assigned = schedule[i]?.detail ? schedule[i].detail : "-"
+            let assigned = schedule[i]? schedule[i] : "-"
             let isHoliday = false
             try{
                 isHoliday = holidays[selectedMonth.split('/')[1]][selectedMonth.split('/')[0]].includes(i)

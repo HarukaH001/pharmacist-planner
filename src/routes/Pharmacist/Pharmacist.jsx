@@ -9,10 +9,10 @@ export const Pharmacist = () => {
     const base_url = window.api + "/pharmacy"
 
     const [loaded, setLoaded] = useState(false)
-    const [type, setType] = useState("อบรมยาเคมีบำบัด")
+    const [type, setType] = useState("แผนกผู้ป่วยใน")
     const [content, setContent] = useState()
     const [chart_sex, setSex] = useState()
-    const [chart_preg, setPreg] = useState()
+    const [chart_role, setRole] = useState()
     const [chart_age, setAge] = useState()
     Chart.defaults.global.elements.arc.borderWidth = 0
     Chart.defaults.global.legend.display = false
@@ -31,56 +31,58 @@ export const Pharmacist = () => {
         console.log(type)
         setContent()
         fetch()
+        //////
+        setLoaded(true)
         // eslint-disable-next-line
     },[type])
 
     useEffect(() =>{
-        if(content){
+        if(content || true){
             let data = ''
-            if(type === 'อบรมยาเคมีบำบัด'){
-                const ref = content.cancer
-                if(!content || !ref) data = []
-                else 
-                data = {
-                    sex: [ref.sex.male, ref.sex.female, ref.sex.other],
-                    preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
-                    age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
-                }
-            } else if(type === 'อบรมเตรียมยาสารอาหาร'){
-                const ref = content.nutrient
-                if(!content || !ref) data = []
-                else 
-                data = {
-                    sex: [ref.sex.male, ref.sex.female, ref.sex.other],
-                    preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
-                    age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
-                }
-            } else if(type === 'ไม่มีใบอบรม'){
-                const ref = content.nope
-                if(!content || !ref) data = []
-                else 
-                data = {
-                    sex: [ref.sex.male, ref.sex.female, ref.sex.other],
-                    preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
-                    age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
-                }
-            }
-
-            // data = {
-            //     sex: [12, 10, 2],
-            //     preg: [2, 12],
-            //     age: [3, 6, 25]
+            // if(type === 'อบรมยาเคมีบำบัด'){
+            //     const ref = content.cancer
+            //     if(!content || !ref) data = []
+            //     else 
+            //     data = {
+            //         sex: [ref.sex.male, ref.sex.female, ref.sex.other],
+            //         preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
+            //         age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
+            //     }
+            // } else if(type === 'อบรมเตรียมยาสารอาหาร'){
+            //     const ref = content.nutrient
+            //     if(!content || !ref) data = []
+            //     else 
+            //     data = {
+            //         sex: [ref.sex.male, ref.sex.female, ref.sex.other],
+            //         preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
+            //         age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
+            //     }
+            // } else if(type === 'ไม่มีใบอบรม'){
+            //     const ref = content.nope
+            //     if(!content || !ref) data = []
+            //     else 
+            //     data = {
+            //         sex: [ref.sex.male, ref.sex.female, ref.sex.other],
+            //         preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
+            //         age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
+            //     }
             // }
+
+            data = {
+                sex: [12, 10],
+                role: [2, 12,8],
+                age: [3, 6, 25]
+            }
 
             setSex(()=>{
                 return (
                     <div className="sex-pie">
                         <Pie
                             data={{
-                                labels: ["เพศชาย","เพศหญิง","อื่น ๆ (ไม่ระบุ)"],
+                                labels: ["เพศชาย","เพศหญิง"],
                                 datasets: [{
                                     data: data.sex,
-                                    backgroundColor: ['#ACB9FF', '#855CF8', '#A758B4']
+                                    backgroundColor: ['#ACB9FF', '#855CF8']
                                 }]
                             }}
                             options={{
@@ -91,15 +93,15 @@ export const Pharmacist = () => {
                 )
             })
 
-            setPreg(()=>{
+            setRole(()=>{
                 return (
-                    <div className="preg-pie">
+                    <div className="role-pie">
                         <Pie
                             data={{
-                                labels: ["ตั้งครรภ์","ไม่ตั้งครรภ์"],
+                                labels: ["เภสัชกร","เจ้าพนักงานเภสัชกรรม","เจ้าหน้าที่"],
                                 datasets: [{
-                                    data: data.preg,
-                                    backgroundColor: ['#ACB9FF', '#A758B4']
+                                    data: data.role,
+                                    backgroundColor: ['#ACB9FF', '#855CF8', '#A758B4']
                                 }]
                             }}
                             options={{
@@ -166,31 +168,31 @@ export const Pharmacist = () => {
                                     </svg>
                                     &nbsp;เพศหญิง
                                 </div>
-                                <div className="tag-chart">
-                                    <svg width="1.2em" height="1.2em" viewBox="0 0.5 16 16" className="bi bi-circle-fill" fill="#A758B4" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="8" cy="8" r="5"/>
-                                    </svg>
-                                    &nbsp;{"อื่น ๆ (ไม่ระบุ)"}
-                                </div>
                             </div>
                         </div>
                         <div className="filler"></div>
                         <div className="chart-preg-module">
-                            <div className="sub-chart-title">เภสัชกรหญิงที่ตั้งครรภ์</div>
-                            {chart_preg}
+                            <div className="sub-chart-title">ตำแหน่ง</div>
+                            {chart_role}
                             <div className="right-box">
                                 <div className="filler"></div>
                                 <div className="tag-chart">
                                     <svg width="1.2em" height="1.2em" viewBox="0 0.5 16 16" className="bi bi-circle-fill" fill="#ACB9FF" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="8" cy="8" r="5"/>
                                     </svg>
-                                    &nbsp;ตั้งครรภ์
+                                    &nbsp;เภสัชกร
+                                </div>
+                                <div className="tag-chart">
+                                    <svg width="1.2em" height="1.2em" viewBox="0 0.5 16 16" className="bi bi-circle-fill" fill="#855CF8" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="8" cy="8" r="5"/>
+                                    </svg>
+                                    &nbsp;เจ้าพนักงานเภสัชกร
                                 </div>
                                 <div className="tag-chart">
                                     <svg width="1.2em" height="1.2em" viewBox="0 0.5 16 16" className="bi bi-circle-fill" fill="#A758B4" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="8" cy="8" r="5"/>
                                     </svg>
-                                    &nbsp;ไม่ตั้งครรภ์
+                                    &nbsp;เจ้าหน้าที่
                                 </div>
                             </div>
                         </div>
@@ -199,10 +201,15 @@ export const Pharmacist = () => {
                 <div className="filler"></div>
                 <div className="right">
                     <div className="top-wrapper">
-                        <select className="main-chart-type-select noselect" defaultValue="อบรมยาเคมีบำบัด" onChange={(e)=>setType(e.target.value)}>
-                            <option value="อบรมยาเคมีบำบัด">อบรมยาเคมีบำบัด</option>
-                            <option value="อบรมเตรียมยาสารอาหาร">อบรมเตรียมยาสารอาหาร</option>
-                            <option value="ไม่มีใบอบรม">ไม่มีใบอบรม</option>
+                        <select className="main-chart-type-select noselect" defaultValue="แผนกผู้ป่วยใน" onChange={(e)=>setType(e.target.value)}>
+                            <option value="แผนกผู้ป่วยใน">I</option>
+                            <option value="แผนกผู้ป่วยใน (ตรวจยาเสพติด)">I*</option>
+                            <option value="Screen ทำงาน 8.00-16.00">S</option>
+                            <option value="Screen ทำงาน 8.30-16.30">Sx</option>
+                            <option value="เตรียมสารอาหารหลอดเลือดดำ">T</option>
+                            <option value="เตรียมยาเคมีบำบัด">C</option>
+                            <option value="เตรียมยาเคมีบำบัด (order)">IC</option>
+                            <option value="แผนกผู้ป่วยนอก">O</option>
                         </select>
                     </div>
                     {loaded && <div className="bottom-wrapper">

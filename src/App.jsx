@@ -75,15 +75,15 @@ const App = () => {
               </Button>
             </Link>
             <div style={{ height: '10px' }}></div>
-            <Link to="/pharmacist" onClick={() => setPath('pharmacist')} style={{ textDecoration: 'none' }}>
-              <Button variant={path === 'pharmacist' ? "primary" : "light"} size="sm" block className="sp nofocus" style={path === 'pharmacist' ? {} : { backgroundColor: 'white', border: 'none' }}>
-                {path !== 'pharmacist' ? <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pie-chart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <Link to="/dashboard" onClick={() => setPath('dashboard')} style={{ textDecoration: 'none' }}>
+              <Button variant={path === 'dashboard' ? "primary" : "light"} size="sm" block className="sp nofocus" style={path === 'dashboard' ? {} : { backgroundColor: 'white', border: 'none' }}>
+                {path !== 'dashboard' ? <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pie-chart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z" />
                 </svg> : <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pie-chart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                     <path fillRule="evenodd" d="M7.5 7.793V1h1v6.5H15v1H8.207l-4.853 4.854-.708-.708L7.5 7.793z" />
                   </svg>}
-                Pharmacist
+                Dashboard
               </Button>
             </Link>
 
@@ -108,7 +108,7 @@ const App = () => {
             <Route exact path="/calendar"><Calendar /></Route>
             <Route exact path="/"><Redirect to="/home" /></Route>
             <Route exact path="/staff"><Staff /></Route>
-            <Route exact path="/pharmacist"><Pharmacist /></Route>
+            <Route exact path="/dashboard"><Pharmacist /></Route>
           </Switch>
         </div>
       </Router>
