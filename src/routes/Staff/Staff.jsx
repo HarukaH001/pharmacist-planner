@@ -26,6 +26,11 @@ export const Staff = () => {
     const [users, setUsers] = useState([])
     const [loaded, setLoaded] = useState(false)
     const base_url = window.api + "/pharmacy"
+    const rolemap = {
+        P:"เภสัชกร",
+        O:"เจ้าพนักงานเภสัชกร",
+        S:"เจ้าหน้าที่"
+    }
 
     useEffect(()=>{
         let target = ''
@@ -114,22 +119,22 @@ export const Staff = () => {
     }
 
     function setEFormState(){
-        const user = users.find(ele=>ele.id===editSelection)
+        const user = users.find(ele=>ele.pid===editSelection)
         // console.log(user)
         if(user){
             setCPreg(user.pregnant)
             setCName(user.name)
-            setCAge(user.age)
+            setCAge(user.birth_date.split('T')[0])
             setCSex(user.sex)
             setCTel(user.phone)
-            //set
-            //set
+            setCRole(rolemap[user.role])
+            setCMail(user.email)
             document.getElementById('name-form').value = user.name
-            document.getElementById('age-form').value = user.age
+            document.getElementById('age-form').value = user.birth_date.split('T')[0]
             document.getElementById('sex-form').value = user.sex
             document.getElementById('tel-form').value = user.phone
-            //set
-            //set
+            document.getElementById('email-form').value = user.email
+            document.getElementById('role-form').value = user.role
             setLoading(false)
         } else showEForm(false)
     }
@@ -150,14 +155,14 @@ export const Staff = () => {
             await new Promise((resolve) => setTimeout(resolve, 2000))
             let newData = await axios.post(base_url+'/delete_bash', {
                 pid: selection.map(ele=>{
-                    const user = users.find(content=>content.id === ele)
+                    const user = users.find(content=>content.pid === ele)
                     if(user){
                         return user.pid
                     } else return null
                 }).filter(ele=>ele!==null)
             })
             if(newData?.data){
-                setUsers(newData.data.sort((a,b)=>a.id-b.id))
+                setUsers(newData.data.sort((a,b)=>a.name-b.name))
             }
             showDForm(false)
         }
@@ -167,13 +172,12 @@ export const Staff = () => {
         errorForm()
         let content = {
             name: cName,
-            birthdate: cAge,
+            birth_date: cAge,
             sex: cSex,
             phone: cTel,
             email: cMail,
             pregnant: cPreg,
-            role: cRole,
-            skill: 'none'
+            role: cRole
         }
         console.log(content)
         if(!cName || !cAge || !cSex || !cTel || (cTel && cTel.length !== 10) || !cRole || !cMail){
@@ -185,15 +189,15 @@ export const Staff = () => {
                 console.log('create form')
                 let newData = await axios.post(base_url+'/add',content)
                 if(newData?.data){
-                    setUsers(newData.data.sort((a,b)=>a.id-b.id))
+                    setUsers(newData.data.sort((a,b)=>a.name-b.name))
                 }
             } else if(eForm){
-                const user = users.find(ele=>ele.id===editSelection)
+                const user = users.find(ele=>ele.pid===editSelection)
                 if(user){
                     content.pid = user.pid
                     let newData = await axios.put(base_url,content)
                     if(newData?.data){
-                        setUsers(newData.data.sort((a,b)=>a.id-b.id))
+                        setUsers(newData.data.sort((a,b)=>a.name-b.name))
                     }
                 }
             }
@@ -211,17 +215,27 @@ export const Staff = () => {
         }
 
         return users?.map((ele, i) => {
+            let list = []
+            if(ele.I) list.push("I")
+            if(ele.I_) list.push("I*")
+            if(ele.S) list.push("S")
+            if(ele.Sx) list.push("Sx")
+            if(ele.T) list.push("T")
+            if(ele.C) list.push("C")
+            if(ele.IC) list.push("IC")
+            if(ele.O) list.push("O")
+            
             return (
-                <tr key={"r1-" + ele.id} className="content-row noselect">
+                <tr key={"r1-" + ele.pid} className="content-row noselect">
                     {eFormMode ? (
                         <td className="s selection-box add-line" onClick={() => {
-                            if(selection.includes(ele.id)){
-                                select(selection.filter((number, index)=>number!==ele.id))
+                            if(selection.includes(ele.pid)){
+                                select(selection.filter((number, index)=>number!==ele.pid))
                             } else {
-                                select(selection.concat([ele.id]))
+                                select(selection.concat([ele.pid]))
                             }
                         }}>
-                            {selection.includes(ele.id)?
+                            {selection.includes(ele.pid)?
                             <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-check-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fillRule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                             </svg>
@@ -232,17 +246,13 @@ export const Staff = () => {
                         </td>
                     ) : null}
                     <td className="tag-td add-line">{i+1}</td>
-                    <td title="คลิกเพื่อแก้ไขข้อมูลผู้ใช้นี้" className={"name-td add-line" + (!eFormMode?" btn-mode":"")} onClick={()=>{if(!eFormMode){selectEdit(ele.id);showEForm(true)}}}>{ele.name.split(' ')[0]}&nbsp;&nbsp;&nbsp;{ele.name.split(' ')[1]}</td>
+                    <td title="คลิกเพื่อแก้ไขข้อมูลผู้ใช้นี้" className={"name-td add-line" + (!eFormMode?" btn-mode":"")} onClick={()=>{if(!eFormMode){selectEdit(ele.pid);showEForm(true)}}}>{ele.name.split(' ')[0]}&nbsp;&nbsp;&nbsp;{ele.name.split(' ')[1]}</td>
                     <td className="age-td add-line">{ele.age}</td>
-                    <td className="can-td add-line" style={ele.cancer?{color: 'transparent'}:{}}>
-                        <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" className="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                        </svg>
+                    <td className="can-td add-line">
+                        {list.reduce((pre,cur,i)=>pre + (i!==0?" ":"") + cur,"")}
                     </td>
-                    <td className="nut-td add-line" style={ele.nutrient?{color: 'transparent'}:{}}>
-                        <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" className="bi bi-check2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                        </svg>
+                    <td className="nut-td add-line">
+                        {rolemap[ele.role]}
                     </td>
                     <td className="tel-td add-line">{ele.phone.substring(0,3) + "-" + ele.phone.substring(3,6) + "-" + ele.phone.substring(6)}</td>
                 </tr>
@@ -262,8 +272,8 @@ export const Staff = () => {
                         <Row className="content-text-2">
                             <ul>
                                 {users?.map((ele,i)=>{
-                                    if(selection.includes(ele.id)){
-                                        return <li key={"ul-"+ele.id}>{"#"+(ele.id===129?'33':ele.id) + (ele.id < 10?"\t\t":ele.id < 100?"\t\t":"\t") + ele.name}</li>
+                                    if(selection.includes(ele.pid)){
+                                        return <li key={"ul-"+ele.pid}>{ele.name}</li>
                                     }
                                     return null
                                 })}
@@ -310,7 +320,7 @@ export const Staff = () => {
                                     เพศ
                                 </Form.Label>
                                 <Col xs={9}>
-                                    <Form.Control as="select" defaultValue="x" className="noselect" onChange={(e)=>setCSex(e.target.value)}>
+                                    <Form.Control as="select" defaultValue="x" className="noselect" onChange={(e)=>{if(e.target.value!=='f')setCPreg(false);setCSex(e.target.value)}}>
                                         <option value="x" disabled>เพศ</option>
                                         <option value="m">ชาย</option>
                                         <option value="f">หญิง</option>
@@ -343,12 +353,12 @@ export const Staff = () => {
                                     }}/>
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} controlId="preg-form" >
+                            <Form.Group as={Row} controlId="preg-form">
                                 <Form.Label column className="noselect">
                                     ตั้งครรภ์
                                 </Form.Label>
                                 <Col xs={9}>
-                                    <div className="checkbox-center" onClick={() => setCPreg(!cPreg)}>{cPreg ? (
+                                    <div className="checkbox-center" onClick={() => {if(cSex==='f')setCPreg(!cPreg)}} style={{color:cSex!=='f'?"rgb(175, 175, 175)":"inherit"}}>{cPreg ? (
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-check-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                                             <path fillRule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z" />
@@ -380,7 +390,7 @@ export const Staff = () => {
                                     ความสามารถ
                                 </Form.Label>
                                 <Col xs={9}>
-                                    <Form.Control type="text" disabled value="Helo"/>
+                                    <Form.Control type="text" disabled value="Tag"/>
                                 </Col>
                             </Form.Group>
                             
@@ -427,7 +437,7 @@ export const Staff = () => {
                             <thead className="noselect add-line">
                                 <tr>
                                     {eFormMode ? (
-                                    <th className="selection-box ss" onClick={()=>select(selection.length === users?.length?[]:users.map(ele=>ele.id))}>
+                                    <th className="selection-box ss" onClick={()=>select(selection.length === users?.length?[]:users.map(ele=>ele.pid))}>
                                         {selection.length === users?.length?
                                         <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-check-square-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fillRule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
