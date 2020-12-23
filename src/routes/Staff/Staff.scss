@@ -73,7 +73,25 @@
             width: 558px;
             // height: 526px;
             height: fit-content;
+            max-height: 99vh;
             padding: 1.5rem 0 1.5rem 0;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+            &::-webkit-scrollbar-track {
+                border-radius: 20px;
+                &:hover {
+                    background: rgba(0, 0, 0, 0.2);
+                }
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.4);
+                border-radius: 20px;
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.6);
+                }
+            }
             .form-wrapper{
                 width: 450px;
                 margin: auto;
@@ -149,6 +167,92 @@
                 background-repeat: no-repeat, repeat !important;
                 background-position: right .7em top 50%, 0 0 !important;
                 background-size: .65em auto, 100% !important;
+            }
+
+            .skill-box{
+                background-color: white;
+                border: 1px solid #CCCCCC;
+                width: 100%;
+                min-height: 45px;
+                border-radius: 5px;
+                font-size: 1.3rem;
+                padding-left: .75rem;
+                padding-top: .375rem;
+                flex-flow: row wrap;
+                align-items: center;
+                justify-content: flex-start;
+                display: flex;
+
+                .tag{
+                    background-color: #5BC0DE;
+                    width: 19%;
+                    height: 28px;
+                    display: flex;
+                    flex-flow: row wrap;
+                    margin-right: 2%;
+                    margin-bottom: .375rem;
+                    border-radius: 3px;
+                    padding: 0 .25rem 0 .75rem;
+                    align-items: center;
+                    color: #ECECEC;
+
+                    .tag-text{
+                        height: 100%;
+                        font-size: 1.3rem;
+                        flex: 1;
+                    }
+
+                    .tag-x{
+                        flex:1;
+                        text-align: center;
+                    }
+                }
+            }
+
+            .skill-rad-box{
+                background-color: white;
+                border: 1px solid #CCCCCC;
+                margin-top: -2px;
+                width: 100%;
+                min-height: 45px;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                font-size: 1.1rem;
+                padding: .375rem .75rem;
+                .checkbox-center{
+                    display: inline;
+                    svg{
+                        margin-bottom: 5px;
+                    }
+                }
+
+                .list-text{
+                    white-space: pre-wrap;
+                    word-spacing: 1px;
+                    font-size: 1.4rem;
+                    line-height: normal;
+                    display: inline;
+                }
+
+                .list-key{
+                    font-size: 1.4rem;
+                    line-height: normal;
+                    display: inline-block;
+                    text-align: left;
+                    margin-left: 15px;
+                    width: 1.5rem;
+                }
+            }
+
+            .skill-limit-box{
+                background-color: white;
+                border: 1px solid #CCCCCC;
+                margin-top: -2px;
+                width: 100%;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+                font-size: 1.2rem;
+                padding: .375rem .75rem;
             }
 
             #sub-form{

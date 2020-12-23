@@ -14,6 +14,7 @@ export const Staff = () => {
     const [cTel, setCTel] = useState()
     const [cMail, setCMail] = useState()
     const [cRole, setCRole] = useState()
+    const [cSkill, setCSkill] = useState([])
     const [form, showForm] = useState(false)
     const [eForm, showEForm] = useState(false)
     const [dForm, showDForm] = useState(false)
@@ -21,6 +22,8 @@ export const Staff = () => {
     const [selection, select] = useState([])
     const [editSelection, selectEdit] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [tags, setTags] = useState()
+    const [skillDropdown, setSkillDropdown] = useState(false)
     const formRef = useRef()
     // const history = useHistory()
     const [users, setUsers] = useState([])
@@ -30,6 +33,16 @@ export const Staff = () => {
         P:"เภสัชกร",
         O:"เจ้าพนักงานเภสัชกร",
         S:"เจ้าหน้าที่"
+    }
+    const skillmap = {
+        I: "แผนกผู้ป่วยใน",
+        "I*" : "แผนกผู้ป่วยใน (ตรวจยาเสพติด)",
+        S: "Screen ทำงาน 8.00-16.00",
+        Sx: "Screen ทำงาน 8.30-16.30",
+        T: "เตรียมสารอาหารหลอดเลือดดำ",
+        C: "เตรียมยาเคมีบำบัด",
+        IC: "เตรียมยาเคมีบำบัด (order)",
+        O: "แผนกผู้ป่วยนอก"
     }
 
     useEffect(()=>{
@@ -44,6 +57,8 @@ export const Staff = () => {
                 showEForm(false)
                 showDForm(false)
                 clearFormState()
+            } else if (e.target.classList.contains('skill-box') && e.target.classList === target){
+                toggleSkillDropdown()
             }
         }
 
@@ -52,7 +67,7 @@ export const Staff = () => {
             window.onmouseup = null
         }
         // eslint-disable-next-line
-    },[])
+    },[skillDropdown])
 
     useEffect(()=>{
         async function fetchAll(){
@@ -105,6 +120,14 @@ export const Staff = () => {
         }
     },[eFormMode])
 
+    useEffect(() =>{
+        renderTags(cSkill)
+    },[cSkill])
+
+    function toggleSkillDropdown(){
+        setSkillDropdown(!skillDropdown)
+    }
+
     function clearFormState(){
         window.getSelection().removeAllRanges();
         setCPreg(false)
@@ -114,7 +137,8 @@ export const Staff = () => {
         setCTel()
         setCMail()
         setCRole()
-        //set
+        setCSkill([])
+        setSkillDropdown(false)
         setLoading(false)
     }
 
@@ -129,6 +153,7 @@ export const Staff = () => {
             setCTel(user.phone)
             setCRole(rolemap[user.role])
             setCMail(user.email)
+            setCSkill(toSkillList(user))
             document.getElementById('name-form').value = user.name
             document.getElementById('age-form').value = user.birth_date.split('T')[0]
             document.getElementById('sex-form').value = user.sex
@@ -177,7 +202,8 @@ export const Staff = () => {
             phone: cTel,
             email: cMail,
             pregnant: cPreg,
-            role: cRole
+            role: cRole,
+            ...toSkillObject(cSkill)
         }
         console.log(content)
         if(!cName || !cAge || !cSex || !cTel || (cTel && cTel.length !== 10) || !cRole || !cMail){
@@ -207,6 +233,34 @@ export const Staff = () => {
         }
     }
 
+    function toSkillList(data){
+        let list = []
+        if(data.I) list.push("I")
+        if(data.I_) list.push("I*")
+        if(data.S) list.push("S")
+        if(data.Sx) list.push("Sx")
+        if(data.T) list.push("T")
+        if(data.C) list.push("C")
+        if(data.IC) list.push("IC")
+        if(data.O) list.push("O")
+        return list
+    }
+
+    function toSkillObject(list){
+        let obj = {
+            I:list.includes('I'),
+            I_:list.includes('I*'),
+            S:list.includes('S'),
+            Sx:list.includes('Sx'),
+            T:list.includes('T'),
+            C:list.includes('C'),
+            IC:list.includes('IC'),
+            O:list.includes('O')
+        }
+
+        return obj
+    }
+    
     function renderUserTable() {
         let ar = []
         const count = 20
@@ -215,15 +269,7 @@ export const Staff = () => {
         }
 
         return users?.map((ele, i) => {
-            let list = []
-            if(ele.I) list.push("I")
-            if(ele.I_) list.push("I*")
-            if(ele.S) list.push("S")
-            if(ele.Sx) list.push("Sx")
-            if(ele.T) list.push("T")
-            if(ele.C) list.push("C")
-            if(ele.IC) list.push("IC")
-            if(ele.O) list.push("O")
+            let list = toSkillList(ele)
             
             return (
                 <tr key={"r1-" + ele.pid} className="content-row noselect">
@@ -258,6 +304,22 @@ export const Staff = () => {
                 </tr>
             )
         })
+    }
+
+    function renderTags(data){
+        setTags(data.map((ele,i)=>{
+            return (
+                <div className="tag noselect" key={'tag-'+i}>
+                    <div className="tag-text">{ele}</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem" fill="currentColor" className="bi bi-x" viewBox="0 -0.75 16 16" onClick={()=>{
+                        let c = data.filter(iter=>iter!==ele)
+                        setCSkill(c)
+                    }}>
+                        <path fillRule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </div>
+            )
+        }))
     }
 
     return (
@@ -390,7 +452,43 @@ export const Staff = () => {
                                     ความสามารถ
                                 </Form.Label>
                                 <Col xs={9}>
-                                    <Form.Control type="text" disabled value="Tag"/>
+                                    <div className="skill-box">
+                                        {tags}
+                                    </div>
+                                    {/* {cSkill.length === 8 && <div className="skill-limit-box noselect">
+                                        Only 8 values can be added
+                                     </div>} */}
+                                    {skillDropdown === true && <div className="skill-rad-box noselect">
+                                        {Object.entries(skillmap).map((ele,i)=>{
+                                            const key = ele[0]
+                                            const value = ele[1]
+
+                                            return (
+                                                <div key={"rad-"+ele}>
+                                                    <div className="checkbox-center" onClick={()=>{
+                                                        const copy = [...cSkill]
+                                                        if(!copy.includes(key)){
+                                                            copy.splice(i,0,key)
+                                                            setCSkill(copy)
+                                                        } else {
+                                                            copy.splice(copy.indexOf(key),1)
+                                                            setCSkill(copy)
+                                                        }
+                                                    }}>{cSkill.includes(key) ? (
+                                                        <svg width=".9em" height=".9em" viewBox="0 0 16 16" fill="currentColor" className="bi bi-check-square-fill" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fillRule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                    </svg>
+                                                    ) : (
+                                                        <svg width=".9em" height=".9em" viewBox="0 0 16 16" className="bi bi-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fillRule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                        </svg>
+                                                    )}</div>
+                                                    <div className="list-key">{key}</div> 
+                                                    <div className="list-text">{": " + value}</div> 
+                                                </div>
+                                            )
+                                        })}
+                                    </div>}
                                 </Col>
                             </Form.Group>
                             
