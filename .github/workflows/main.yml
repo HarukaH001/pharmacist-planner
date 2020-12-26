@@ -30,5 +30,8 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            ls -l
+            cd /var/www/demo1
+            git pull origin deploy
+            npm install
+            npm run build
           
