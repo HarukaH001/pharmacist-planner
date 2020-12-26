@@ -13,11 +13,11 @@
         flex-flow: row;
 
         .top-wrapper{
-            height: 80px;
+            height: 70px;
         }
 
         .bottom-wrapper{
-            height: calc(100% - 80px);
+            height: calc(100% - 70px);
         }
 
         .spinner-grow{
@@ -47,7 +47,7 @@
             font-size: 1.75rem;
             height: 50px;
         }
-        .sex-pie, .preg-pie{
+        .sex-pie, .role-pie{
             float: left;
             height: calc(100% - 50px);
             width: 50%;
@@ -85,7 +85,7 @@
             }
         }
         .tag-chart{
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
@@ -146,7 +146,7 @@
                 background-size: .65em auto, 100% !important;
                 
                 padding: 3px 15px 3px 15px;
-                width: 250px;
+                width: 100px;
                 &:focus{
                     outline: none;
                     box-shadow: none;

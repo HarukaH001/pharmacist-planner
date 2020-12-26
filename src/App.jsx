@@ -53,6 +53,40 @@ const App = () => {
                 Home
               </Button>
             </Link>
+
+            <div style={{ height: '10px' }}></div>
+            <div style={{height:"43px"}}>
+              <Button variant={"light"} size="sm" block className="admin nofocus" style={{ backgroundColor: 'white', border: 'none' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-person-badge-fill" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
+                </svg>
+                Staff Manage
+              </Button>
+            </div>
+            <div style={{ height: '10px' }}></div>
+            <Link to="/staff" onClick={() => setPath('staff')} style={{ textDecoration: 'none' }}>
+              <Button variant={path === 'staff' ? "primary" : "light"} size="sm" block className="sp nofocus" style={path === 'staff' ? {} : { backgroundColor: 'white', border: 'none' }}>
+                {path !== 'staff' ? <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: '7px' }}>
+                  <path fillRule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                </svg> : <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                  </svg>}
+                Staff
+              </Button>
+            </Link>
+            <div style={{ height: '10px' }}></div>
+            <Link to="/dashboard" onClick={() => setPath('dashboard')} style={{ textDecoration: 'none' }}>
+              <Button variant={path === 'dashboard' ? "primary" : "light"} size="sm" block className="sp nofocus" style={path === 'dashboard' ? {} : { backgroundColor: 'white', border: 'none' }}>
+                {path !== 'dashboard' ? <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pie-chart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z" />
+                </svg> : <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pie-chart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path fillRule="evenodd" d="M7.5 7.793V1h1v6.5H15v1H8.207l-4.853 4.854-.708-.708L7.5 7.793z" />
+                  </svg>}
+                Dashboard
+              </Button>
+            </Link>
+
             <div style={{ height: '10px' }}></div>
             <Link to="/calendar" onClick={() => setPath('calendar')} style={{ textDecoration: 'none' }}>
               <Button variant={path === 'calendar' ? "primary" : "light"} size="sm" block className="nofocus" style={path === 'calendar' ? {} : { backgroundColor: 'white', border: 'none' }}>
@@ -65,29 +99,6 @@ const App = () => {
                 Calendar
               </Button>
             </Link>
-            <div style={{ height: '10px' }}></div>
-            <Link to="/staff" onClick={() => setPath('staff')} style={{ textDecoration: 'none' }}>
-              <Button variant={path === 'staff' ? "primary" : "light"} size="sm" block className="nofocus" style={path === 'staff' ? {} : { backgroundColor: 'white', border: 'none' }}>
-                {path !== 'staff' ? <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style={{ marginLeft: '7px' }}>
-                  <path fillRule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                </svg> : <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-                  </svg>}
-                Staff
-              </Button>
-            </Link>
-            <div style={{ height: '10px' }}></div>
-            <Link to="/pharmacist" onClick={() => setPath('pharmacist')} style={{ textDecoration: 'none' }}>
-              <Button variant={path === 'pharmacist' ? "primary" : "light"} size="sm" block className="nofocus" style={path === 'pharmacist' ? {} : { backgroundColor: 'white', border: 'none' }}>
-                {path !== 'pharmacist' ? <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pie-chart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z" />
-                </svg> : <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-pie-chart" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                    <path fillRule="evenodd" d="M7.5 7.793V1h1v6.5H15v1H8.207l-4.853 4.854-.708-.708L7.5 7.793z" />
-                  </svg>}
-                Pharmacist
-              </Button>
-            </Link>
           </div>
         </div>
         <div className="top-bar"></div>
@@ -97,7 +108,7 @@ const App = () => {
             <Route exact path="/calendar"><Calendar /></Route>
             <Route exact path="/"><Redirect to="/home" /></Route>
             <Route exact path="/staff"><Staff /></Route>
-            <Route exact path="/pharmacist"><Pharmacist /></Route>
+            <Route exact path="/dashboard"><Pharmacist /></Route>
           </Switch>
         </div>
       </Router>
