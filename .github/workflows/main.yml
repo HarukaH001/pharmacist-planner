@@ -28,5 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          pwd
+          npm install
+          npm run build
+          pm2 startOrReload serve.js --name demo1
           
