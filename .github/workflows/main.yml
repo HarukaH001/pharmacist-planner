@@ -32,6 +32,4 @@ jobs:
           script: |
             cd /var/www/demo1
             git pull origin deploy
-            npm install
-            npm run build
           
