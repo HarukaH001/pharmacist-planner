@@ -34,15 +34,16 @@ export const Staff = () => {
         O:"เจ้าพนักงานเภสัชกร",
         S:"เจ้าหน้าที่"
     }
+    const mapRole = {
+        "เภสัชกร":"P",
+        "เจ้าพนักงานเภสัชกร":"O",
+        "เจ้าหน้าที่":"S"
+    }
     const skillmap = {
-        I: "แผนกผู้ป่วยใน",
-        "I*" : "แผนกผู้ป่วยใน (ตรวจยาเสพติด)",
-        S: "Screen ทำงาน 8.00-16.00",
-        Sx: "Screen ทำงาน 8.30-16.30",
-        T: "เตรียมสารอาหารหลอดเลือดดำ",
-        C: "เตรียมยาเคมีบำบัด",
         IC: "เตรียมยาเคมีบำบัด (order)",
-        O: "แผนกผู้ป่วยนอก"
+        C: "เตรียมยาเคมีบำบัด",
+        S: "Screen ทำงาน 8.00-16.00",
+        T: "เตรียมสารอาหารหลอดเลือดดำ",
     }
 
     useEffect(()=>{
@@ -73,7 +74,7 @@ export const Staff = () => {
         async function fetchAll(){
             setLoaded(false)
             let res = await axios.get(base_url + "/all")
-            console.log(res.data)
+            // console.log(res.data)
             setUsers(res?.data?res.data.sort((a,b)=>a.name-b.name):[])
             setLoaded(true)
         }
@@ -197,12 +198,12 @@ export const Staff = () => {
         errorForm()
         let content = {
             name: cName,
-            birth_date: cAge,
+            birth_date: cAge?(new Date(cAge)).toISOString():cAge,
             sex: cSex,
             phone: cTel,
             email: cMail,
             pregnant: cPreg,
-            role: cRole,
+            role: mapRole[cRole] || cRole,
             ...toSkillObject(cSkill)
         }
         console.log(content)
@@ -235,27 +236,22 @@ export const Staff = () => {
 
     function toSkillList(data){
         let list = []
-        if(data.I) list.push("I")
-        if(data.I_) list.push("I*")
-        if(data.S) list.push("S")
-        if(data.Sx) list.push("Sx")
-        if(data.T) list.push("T")
-        if(data.C) list.push("C")
         if(data.IC) list.push("IC")
-        if(data.O) list.push("O")
+        if(data.C) list.push("C")
+        if(data.S) list.push("S")
+        if(data.T) list.push("T")
         return list
     }
 
     function toSkillObject(list){
         let obj = {
-            I:list.includes('I'),
-            I_:list.includes('I*'),
+            I:false,
             S:list.includes('S'),
-            Sx:list.includes('Sx'),
+            Sx:false,
             T:list.includes('T'),
             C:list.includes('C'),
             IC:list.includes('IC'),
-            O:list.includes('O')
+            smc:false
         }
 
         return obj

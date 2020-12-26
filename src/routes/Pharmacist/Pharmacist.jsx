@@ -9,7 +9,7 @@ export const Pharmacist = () => {
     const base_url = window.api + "/pharmacy"
 
     const [loaded, setLoaded] = useState(false)
-    const [type, setType] = useState("แผนกผู้ป่วยใน")
+    const [type, setType] = useState("เตรียมยาเคมีบำบัด (order)")
     const [content, setContent] = useState()
     const [chart_sex, setSex] = useState()
     const [chart_role, setRole] = useState()
@@ -201,15 +201,11 @@ export const Pharmacist = () => {
                 <div className="filler"></div>
                 <div className="right">
                     <div className="top-wrapper">
-                        <select className="main-chart-type-select noselect" defaultValue="แผนกผู้ป่วยใน" onChange={(e)=>setType(e.target.value)}>
-                            <option value="แผนกผู้ป่วยใน">I</option>
-                            <option value="แผนกผู้ป่วยใน (ตรวจยาเสพติด)">I*</option>
-                            <option value="Screen ทำงาน 8.00-16.00">S</option>
-                            <option value="Screen ทำงาน 8.30-16.30">Sx</option>
-                            <option value="เตรียมสารอาหารหลอดเลือดดำ">T</option>
-                            <option value="เตรียมยาเคมีบำบัด">C</option>
+                        <select className="main-chart-type-select noselect" defaultValue="เตรียมยาเคมีบำบัด (order)" onChange={(e)=>setType(e.target.value)}>
                             <option value="เตรียมยาเคมีบำบัด (order)">IC</option>
-                            <option value="แผนกผู้ป่วยนอก">O</option>
+                            <option value="เตรียมยาเคมีบำบัด">C</option>
+                            <option value="Screen ทำงาน 8.00-16.00">S</option>
+                            <option value="เตรียมสารอาหารหลอดเลือดดำ">T</option>
                         </select>
                     </div>
                     {loaded && <div className="bottom-wrapper">
