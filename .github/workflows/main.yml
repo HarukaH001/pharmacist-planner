@@ -31,5 +31,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /var/www/demo1
+            git restore *
             git pull origin deploy
           
