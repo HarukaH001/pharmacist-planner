@@ -28,7 +28,7 @@ export const Pharmacist = () => {
     },[])
 
     useEffect(() =>{
-        console.log(type)
+        // console.log(type)
         setContent()
         fetch()
         //////
@@ -137,7 +137,7 @@ export const Pharmacist = () => {
     async function fetch(){
         setLoaded(false)
         let res = await axios.get(base_url+'/data_chart')
-        console.log(res.data)
+        // console.log(res.data)
         setContent(res.data)
         setLoaded(true)
     }  
