@@ -4,20 +4,93 @@
     height: 100%;
     background-color:#F5F5F5;
 
-    .container{
-        padding: 2% 4% 4% 4%;
+    .p-container{
+        padding: 1% 1% 1% 1%;
         width: 100%;
         height: 100%;
 
         display: flex;
-        flex-flow: row;
+        flex-flow: row wrap;
 
         .top-wrapper{
-            height: 70px;
+            position: relative;
+            width: 100%;
+            height: 60px;
+        }
+
+        .main-chart-type-select{
+            float: right;
+            margin-top: 5px;
+            background-color: #e3e8ec;
+            border-radius: 5px;
+            border-color: rgb(175, 175, 175);
+            color:  rgb(88, 88, 88);
+            -webkit-appearance:none;
+            -moz-appearance: none; 
+            -webkit-appearance: none; 
+            appearance: none;
+
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='0.5em' height='1em' viewBox='0 0 16 16' class='bi bi-caret-down-fill' fill='rgb(88, 88, 88)' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat, repeat !important;
+            background-position: right .7em top 50%, 0 0 !important;
+            background-size: .65em auto, 100% !important;
+            
+            padding: 3px 15px 3px 15px;
+            width: 100px;
+            &:focus{
+                outline: none;
+                box-shadow: none;
+            }
+            font-size: 1.5rem;
         }
 
         .bottom-wrapper{
-            height: calc(100% - 70px);
+            position: relative;
+            width: 100%;
+            height: calc(100% - 60px);
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: space-between;
+
+            .chart-box{
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 3px 3px #0000000e;
+                padding: 5px 15px 15px 15px;
+                height: 100%;
+                width: 32%;
+                display: flex;
+                flex-flow: row wrap;
+            }
+            .main-chart-box{
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 3px 3px #0000000e;
+                padding: 5px 15px 15px 15px;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-flow: row wrap;
+            }
+
+            .top{
+                width: 100%;
+                height: 40%;
+                display: flex;
+                flex-flow: row wrap;
+            }
+            .bottom{
+                width: 100%;
+                height: 57%;
+            }
+            .filler{
+                width: 100%;
+                flex: 1;
+            }
+            .h-filler{
+                height: 100%;
+                flex-grow: 1;
+            }
         }
 
         .spinner-grow{
@@ -36,124 +109,108 @@
                 transform: scale(1.5);
             }
         }
-
-        .filler{
-            flex: 1;
-        }
         .main-chart-title{
+            float: left;
             font-size: 2.25rem;
         }
         .sub-chart-title{
             font-size: 1.75rem;
-            height: 50px;
+            @media screen and (max-width: 1600px){
+                font-size: 1.5rem;
+            }
+            width: 100%;
+            height: 36px;
         }
-        .sex-pie, .role-pie{
-            float: left;
+        .sub-chart-box{
+            display: flex;
+            flex-flow: column wrap;
+            width: 100%;
             height: calc(100% - 50px);
-            width: 50%;
-            @media screen and (max-width: 1023px) {
-                width: 100%;
-                height: 60%;
+            @media screen and (max-width: 1600px){
+                height: calc(100% - 36px);
             }
         }
-        .age-pie{
-            height: 50%;
+        .sub-chart-box-float{
+            position: absolute;
             width: 100%;
+            height: calc(100% - 50px);
+            @media screen and (max-width: 1600px){
+                height: calc(100% - 36px);
+            }
+        }
+        .sex-pie, .role-pie, .age-pie{
+            height: 100%;
+            width: 50%;
         }
         .right-box{
-            float: left;
-            height: calc(100% - 50px);
             width: 50%;
-            display: flex;
-            flex-flow: column;
+            height: 100%;
             padding-left: 15px;
-            @media screen and (max-width: 1023px) {
-                width: 100%;
-                height: calc(40% - 50px);
-            }
-        }
-        .bottom-box{
-            height: calc(50% - 50px);
-            width: 100%;
             display: flex;
-            flex-flow: column;
-            padding-top: 2rem;
-            padding-left: 2rem;
-            @media screen and (max-width: 1023px) {
-                padding-top: 0;
-                padding-left: 0;
-            }
+            flex-flow: column wrap;
         }
         .tag-chart{
+            width: 100%;
             font-size: 1.4rem;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+            @media screen and (max-width: 1600px){
+                font-size: 1.15rem;
+            }
         }
-
-        .left{
-            width: 47%;
-
-            .bottom-wrapper{
-                display: flex;
-                flex-flow: column;
-                
-                .chart-sex-module{
-                    width: 100%;
-                    height: 47%;
-                    background-color: white;
-                    border-radius: 8px;
-                    box-shadow: 0 3px 3px #0000000e;
-                    padding: 15px 30px 30px 30px;
-                }
-
-                .chart-preg-module{
-                    width: 100%;
-                    height: 47%;
-                    background-color: white;
-                    border-radius: 8px;
-                    box-shadow: 0 3px 3px #0000000e;
-                    padding: 15px 30px 30px 30px;
-                }
+        .newline-tag-chart{
+            width: 100%;
+            margin-top: -5px;
+            font-size: 1.4rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            @media screen and (max-width: 1600px){
+                font-size: 1.15rem;
             }
         }
 
-        .right{
-            width: 47%;
+        .graph-box{
+            width: 100%;
+            height: calc(100% - 50px);
+            @media screen and (max-width: 1600px){
+                height: calc(100% - 36px);
+            }
+            overflow-x: scroll;
 
-            .bottom-wrapper{
-                padding: 15px 30px 15px 30px;
-                background-color:white;
-                border-radius: 8px;
-                box-shadow: 0 3px 3px #0000000e;
+            .graph-wrapper{
+                height: 100%;
+                width: 100%;
             }
 
-            .main-chart-type-select{
-                float: right;
-                margin-top: 5px;
+            &::-webkit-scrollbar {
+                height: 10px;
+            }
+            &::-webkit-scrollbar-track {
+                border-radius: 20px;
+                &:hover {
+                    background: rgba(0, 0, 0, 0.2);
+                }
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.4);
+                border-radius: 20px;
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.6);
+                }
+            }
+        }
+        .submit-btn{
+            font-size: 1.3rem;
+            margin-left: 15px;
+            &:focus{
+                background-color: white;
+                box-shadow: none;
+            }
+            &:hover{
                 background-color: #e3e8ec;
-                border-radius: 5px;
-                border-color: rgb(175, 175, 175);
-                color:  rgb(88, 88, 88);
-                -webkit-appearance:none;
-                -moz-appearance: none; 
-                -webkit-appearance: none; 
-                appearance: none;
-
-                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='0.5em' height='1em' viewBox='0 0 16 16' class='bi bi-caret-down-fill' fill='rgb(88, 88, 88)' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3e%3c/svg%3e");
-                background-repeat: no-repeat, repeat !important;
-                background-position: right .7em top 50%, 0 0 !important;
-                background-size: .65em auto, 100% !important;
-                
-                padding: 3px 15px 3px 15px;
-                width: 100px;
-                &:focus{
-                    outline: none;
-                    box-shadow: none;
-                }
-                font-size: 1.5rem;
             }
         }
-        
     }
 }
