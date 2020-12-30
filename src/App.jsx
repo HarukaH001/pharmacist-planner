@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
-import { Home, Calendar, Staff, Pharmacist } from './routes';
+import { Home, Calendar, Staff, Pharmacist, Manage } from './routes';
 import { Button } from 'react-bootstrap'
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
     })
 
     return () => {
-      window.removeEventListener('resize')
+      window.onresize = null
     }
   }, [])
 
@@ -55,14 +55,17 @@ const App = () => {
             </Link>
 
             <div style={{ height: '10px' }}></div>
-            <div style={{height:"43px"}}>
-              <Button variant={"light"} size="sm" block className="admin nofocus" style={{ backgroundColor: 'white', border: 'none' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-person-badge-fill" viewBox="0 0 16 16">
+            <Link to="/manage" onClick={() => setPath('manage')} style={{ textDecoration: 'none' }}>
+              <Button variant={path === 'manage' ? "primary" : "light"} size="sm" block className="nofocus" style={path === 'manage' ? {} : { backgroundColor: 'white', border: 'none' }}>
+                {path !== 'manage'? <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-person-badge-fill" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
-                </svg>
+                </svg> : <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="bi bi-person-badge" viewBox="0 0 16 16">
+                    <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z"/>
+                  </svg>}
                 Staff Manage
               </Button>
-            </div>
+            </Link>
             <div style={{ height: '10px' }}></div>
             <Link to="/staff" onClick={() => setPath('staff')} style={{ textDecoration: 'none' }}>
               <Button variant={path === 'staff' ? "primary" : "light"} size="sm" block className="sp nofocus" style={path === 'staff' ? {} : { backgroundColor: 'white', border: 'none' }}>
@@ -107,6 +110,7 @@ const App = () => {
             <Route exact path="/home"><Home /></Route>
             <Route exact path="/calendar"><Calendar /></Route>
             <Route exact path="/"><Redirect to="/home" /></Route>
+            <Route exact path="/manage"><Manage /></Route>
             <Route exact path="/staff"><Staff /></Route>
             <Route exact path="/dashboard"><Pharmacist /></Route>
           </Switch>
