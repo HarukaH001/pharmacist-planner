@@ -175,13 +175,6 @@
             }
         }
 
-        .bar-chart-overall,.bar0-chart-overall{
-            position: absolute;
-            left: 0;
-            top: 0;
-            pointer-events:none;
-        }
-
         .graph-box{
             width: 100%;
             height: calc(100% - 50px);

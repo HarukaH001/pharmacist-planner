@@ -38,10 +38,47 @@ export const Manage = () => {
                 {loaded && (
                     <div className="m-wrapper">
                         <div className="v1-box">
+                            <div className="chart-box">
 
+                            </div>
+                            <div className="h-filler"></div>
+                            <div className="chart-box">
+                        
+                            </div>
+                            <div className="h-filler"></div>
+                            <div className="chart-box">
+                        
+                            </div>
                         </div>
+                        <div className="filler"></div>
                         <div className="v2-box">
-
+                            <div className="main-chart-box">
+                            
+                            </div>
+                        </div>
+                        <div className="filler"></div>
+                        <div className="v-box">
+                            <div className="main-chart-box">
+                            
+                            </div>
+                        </div>
+                        <div className="filler"></div>
+                        <div className="v-box">
+                            <div className="main-chart-box">
+                            
+                            </div>
+                        </div>
+                        <div className="filler"></div>
+                        <div className="v-box">
+                            <div className="main-chart-box">
+                            
+                            </div>
+                        </div>
+                        <div className="filler"></div>
+                        <div className="v-box">
+                            <div className="main-chart-box">
+                            
+                            </div>
                         </div>
                     </div>
                 )}

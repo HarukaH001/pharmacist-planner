@@ -174,7 +174,6 @@ export const Pharmacist = () => {
         if(overall){
             const data = overData
             const ctx = document.getElementById('bar-chart-overall')
-            // const ctx0 = document.getElementById('bar0-chart-overall')
             const ref = document.querySelector('.graph-wrapper')
             if(!fit){
                 ref.style.width = Math.floor((data.labels.length / 30) * 100) + '%'
@@ -185,16 +184,6 @@ export const Pharmacist = () => {
                 options: {
                     responsive: true,
                     maintainAspectRatio : false,
-                    animation: {
-                        onComplete: (animation) => {
-                            let sourceCanvas = myLiveChart.chart.canvas;
-                            let copyWidth = myLiveChart.scales['y-axis-0'].width - 10;
-                            let copyHeight = myLiveChart.scales['y-axis-0'].height + myLiveChart.scales['y-axis-0'].top + 10;
-                            let targetCtx = document.getElementById("bar0-chart-overall").getContext("2d");
-                            targetCtx.canvas.width = copyWidth;
-                            targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
-                        }
-                    },
                     scales: {
                         xAxes: [{
                             scaleLabel: {
@@ -223,39 +212,6 @@ export const Pharmacist = () => {
                     },
                 }
             })
-            // new Chart(ctx0, {
-            //     type: 'bar',
-            //     data: {},
-            //     options: {
-            //         maintainAspectRatio : false,
-            //         scales: {
-            //             xAxes: [{
-            //                 scaleLabel: {
-            //                     display: false,
-            //                     labelString: "ชื่อเภสัชกร",
-            //                     fontSize: 20,
-            //                     fontFamily: 'mainFont'
-            //                 },
-            //                 gridLines: {
-            //                     display: false
-            //                 }
-            //             }],
-            //             yAxes: [{
-            //                 scaleLabel: {
-            //                     display: false,
-            //                     labelString: "จำนวนการเข้าเวร (ครั้ง)",
-            //                     fontSize: 20,
-            //                     fontFamily: 'mainFont'
-            //                 },
-            //                 ticks: {
-            //                     beginAtZero: true,
-            //                     steps: 2,
-            //                     max: 20
-            //                 }
-            //             }]
-            //         },
-            //     }
-            // })
         }
     },[overall])
 
@@ -381,7 +337,6 @@ export const Pharmacist = () => {
                                         {overall}    
                                     </div>
                                 </div>
-                                {/* <canvas id="bar0-chart-overall"></canvas> */}
                             </div>
                         </div>
                     </div>
