@@ -1,0 +1,325 @@
+.Manage{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color:#F5F5F5;
+
+    .m-container{
+        padding: 1% 1% 1% 1%;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-flow: row wrap;
+
+        .spinner-grow{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        @keyframes spinner-grow {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1; 
+                -webkit-transform: scale(1.5);
+                transform: scale(1.5);
+            }
+        }
+
+        .m-wrapper{
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+            &::-webkit-scrollbar-track {
+                border-radius: 20px;
+                &:hover {
+                    background: rgba(0, 0, 0, 0.2);
+                }
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.4);
+                border-radius: 20px;
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.6);
+                }
+            }
+
+            .v-box{
+                width: 100%;
+                height: 48%;
+            }
+            .v1-box{
+                width: 100%;
+                height: 25%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+            }
+            .v2-box{
+                width: 100%;
+                height: 71%;
+            }
+
+            .chart-box{
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 3px 3px #0000000e;
+                // padding: 5px 15px 15px 15px;
+                height: 100%;
+                width: 24%;
+            }
+
+            .main-chart-box{
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 3px 3px #0000000e;
+                padding: 5px 15px 15px 15px;
+                height: 100%;
+                width: 100%;
+            }
+
+            .filler{
+                height: 20px;
+                width: 100%;
+            }
+            .h-filler{
+                height: 100%;
+                flex-grow: 1;
+            }
+
+            .header-v1-box{
+                width: 100%;
+                height: 30%;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                background-color: #E6E6E6;
+                border: 1px solid #CCCCCC;
+                box-sizing: border-box;
+                text-align: center;
+                font-size: 3vh;
+                white-space: pre-wrap;
+                line-height: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            
+            .body-v1-box{
+                width: 100%;
+                height: 70%;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                padding: 2% 5% 7% 5%;
+                @media screen and (min-width:1600px){
+                    padding: 4% 7% 9% 7%;
+                }
+                display:flex;
+                flex-flow: row nowrap;
+                justify-content: baseline;
+            }
+
+            .static-body{
+                width: 40%;
+                height: 100%;
+
+                .static-wrapper{
+                    // background-color: teal;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-flow: row wrap;
+                    align-items: flex-end;
+                    padding-left: 15px;
+                }
+            }
+
+            .dynamic-body{
+                width: 60%;
+                height: 100%;
+                text-align: center;
+            }
+            
+            .dynamic-body::before {
+                display: inline-block;
+                height: 100%;
+                content: '';
+              }
+              
+            .dynamic-body span {
+                font-family: 'Roboto';
+                letter-spacing: -5px;
+                font-size: 8.25vh;
+                line-height: normal;
+                vertical-align: baseline;
+                font-weight: 200;
+              }
+
+            
+
+            .stick-1, .stick-2, .stick-3{
+                width: 22%;
+            }
+            .stick-1{
+                height: 80%;
+            }
+            .stick-2{
+                height: 40%;
+            }
+            .stick-3{
+                height: 50%;
+            }
+            .c1{
+                background-color: #AAE5F6;
+            }
+            .c2{
+                background-color: #C9B9F8;
+            }
+            .c3{
+                background-color:#F8C1BF;
+            }
+            .c4{
+                background-color:#8E858E;
+            }
+            .stick-trans{
+                height: 100%;
+                width: 12%;
+            }
+            .main-chart-title{
+                font-size: 2.25rem;
+                @media screen and (max-width: 1600px){
+                    font-size: 1.75rem;
+                }
+                width: 100%;
+                height: 40px;
+            }
+            .sub-chart-title{
+                font-size: 1.75rem;
+                @media screen and (max-width: 1600px){
+                    font-size: 1.5rem;
+                }
+                width: 100%;
+                height: 30px;
+            }
+            .sub-chart-label{
+                width: 100%;
+                font-size: 20px;
+            }
+            .left-graph-box,.right-graph-box,.right-main-graph-box{
+                float: left;
+            }
+            .right-main-graph-box{
+                margin-left: 100px;
+                height: 70px;
+                width: 500px;
+                display: flex;
+                flex-direction: wrap;
+                flex-wrap: wrap;
+                padding: 10px 0 5px 0;
+            }
+            .right-graph-box{
+                margin-left: 50px;
+                height: 60px;
+                width: 100px;
+            }
+            .main-graph-box{
+                width: 100%;
+                height: calc(100% - 70px);
+                overflow-x: scroll;
+    
+                .overall-wrapper{
+                    position: relative;
+                    height: 100%;
+                    width: 100%;
+                }
+    
+                &::-webkit-scrollbar {
+                    height: 10px;
+                    width: 10px;
+                }
+                &::-webkit-scrollbar-track {
+                    border-radius: 20px;
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.2);
+                    }
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(0, 0, 0, 0.4);
+                    border-radius: 20px;
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.6);
+                    }
+                }
+            }
+            .graph-box{
+                width: 100%;
+                height: calc(100% - 60px);
+                overflow-x: scroll;
+    
+                .graph1,.graph2,.graph3,.graph4{
+                    position: relative;
+                    height: 100%;
+                    width: 100%;
+                }
+    
+                &::-webkit-scrollbar {
+                    height: 10px;
+                    width: 10px;
+                }
+                &::-webkit-scrollbar-track {
+                    border-radius: 20px;
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.2);
+                    }
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(0, 0, 0, 0.4);
+                    border-radius: 20px;
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.6);
+                    }
+                }
+            }
+
+            .box{
+                font-size: 1.2rem;
+                width: 250px;
+                height: 15px;
+                // font-weight: 600;
+
+                .palette{
+                    margin-right: 7px;
+                    display: inline-block;
+                    width: 50px;
+                    height: 15px;
+                    border-radius: 2px;
+                    transform: translateY(15%);
+
+                    &.blue{
+                        background-color: #B7E6F4BB;
+                    }
+
+                    &.purple{
+                        background-color:#B8A4F2BB;
+                    }
+
+                    &.red{
+                        background-color:#E19F9DBB;
+                    }
+
+                    &.grey{
+                        background-color:#928992BB;
+                    }
+                }
+            }
+            
+        }
+    }
+}
