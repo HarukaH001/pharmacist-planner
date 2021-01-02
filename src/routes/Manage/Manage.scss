@@ -233,6 +233,7 @@
                 width: 100%;
                 height: calc(100% - 70px);
                 overflow-x: scroll;
+                overflow-y: hidden;
     
                 .overall-wrapper{
                     position: relative;
