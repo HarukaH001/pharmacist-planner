@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, { useState, useEffect} from 'react';
 import './Pharmacist.scss';
 import axios from 'axios'
-import { Button } from 'react-bootstrap'
 import Spinner from 'react-bootstrap/Spinner'
 import Chart from 'chart.js'
 import { Pie } from 'react-chartjs-2'

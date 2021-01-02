@@ -64,7 +64,7 @@ export const Calendar = () => {
             }
         })
         
-        console.log(data)
+        // console.log(data)
         setContents(data.sort((a,b)=>a.name-b.name))
         setLoaded(true)
     }   
