@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5b46ddce.chunk.css",
+    "main.js": "/static/js/main.ff3adddb.chunk.js",
+    "main.js.map": "/static/js/main.ff3adddb.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.58a960c6.js",
+    "runtime-main.js.map": "/static/js/runtime-main.58a960c6.js.map",
+    "static/css/2.4662504d.chunk.css": "/static/css/2.4662504d.chunk.css",
+    "static/js/2.52612538.chunk.js": "/static/js/2.52612538.chunk.js",
+    "static/js/2.52612538.chunk.js.map": "/static/js/2.52612538.chunk.js.map",
+    "static/js/3.d897aae9.chunk.js": "/static/js/3.d897aae9.chunk.js",
+    "static/js/3.d897aae9.chunk.js.map": "/static/js/3.d897aae9.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.4662504d.chunk.css.map": "/static/css/2.4662504d.chunk.css.map",
+    "static/css/main.5b46ddce.chunk.css.map": "/static/css/main.5b46ddce.chunk.css.map",
+    "static/js/2.52612538.chunk.js.LICENSE.txt": "/static/js/2.52612538.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/static/media/FC Iconic Regular.203b6ffd.ttf",
+    "static/media/hospital-image.04abc95a.svg": "/static/media/hospital-image.04abc95a.svg",
+    "static/media/hospital-logo.8b42bc30.png": "/static/media/hospital-logo.8b42bc30.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.58a960c6.js",
+    "static/css/2.4662504d.chunk.css",
+    "static/js/2.52612538.chunk.js",
+    "static/css/main.5b46ddce.chunk.css",
+    "static/js/main.ff3adddb.chunk.js"
+  ]
+}
