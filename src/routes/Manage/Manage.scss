@@ -71,9 +71,9 @@
                 background-color: white;
                 border-radius: 8px;
                 box-shadow: 0 3px 3px #0000000e;
-                padding: 5px 15px 15px 15px;
+                // padding: 5px 15px 15px 15px;
                 height: 100%;
-                width: 32%;
+                width: 24%;
             }
 
             .main-chart-box{
@@ -92,6 +92,105 @@
             .h-filler{
                 height: 100%;
                 flex-grow: 1;
+            }
+
+            .header-v1-box{
+                width: 100%;
+                height: 30%;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                background-color: #E6E6E6;
+                border: 1px solid #CCCCCC;
+                box-sizing: border-box;
+                text-align: center;
+                font-size: 3vh;
+                white-space: pre-wrap;
+                line-height: normal;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            
+            .body-v1-box{
+                width: 100%;
+                height: 70%;
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                padding: 2% 5% 7% 5%;
+                @media screen and (min-width:1600px){
+                    padding: 4% 7% 9% 7%;
+                }
+                display:flex;
+                flex-flow: row nowrap;
+                justify-content: baseline;
+            }
+
+            .static-body{
+                width: 40%;
+                height: 100%;
+
+                .static-wrapper{
+                    // background-color: teal;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-flow: row wrap;
+                    align-items: flex-end;
+                    padding-left: 15px;
+                }
+            }
+
+            .dynamic-body{
+                width: 60%;
+                height: 100%;
+                text-align: center;
+            }
+            
+            .dynamic-body::before {
+                display: inline-block;
+                height: 100%;
+                content: '';
+              }
+              
+            .dynamic-body span {
+                font-family: 'Roboto';
+                letter-spacing: -5px;
+                font-size: 8.25vh;
+                line-height: normal;
+                vertical-align: baseline;
+                font-weight: 200;
+              }
+
+            
+
+            .stick-1, .stick-2, .stick-3{
+                width: 22%;
+            }
+            .stick-1{
+                height: 80%;
+            }
+            .stick-2{
+                height: 40%;
+            }
+            .stick-3{
+                height: 50%;
+            }
+            .c1{
+                background-color: #AAE5F6;
+            }
+            .c2{
+                background-color: #C9B9F8;
+            }
+            .c3{
+                background-color:#F8C1BF;
+            }
+            .c4{
+                background-color:#8E858E;
+            }
+            .stick-trans{
+                height: 100%;
+                width: 12%;
             }
         }
     }

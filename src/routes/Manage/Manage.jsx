@@ -39,15 +39,87 @@ export const Manage = () => {
                     <div className="m-wrapper">
                         <div className="v1-box">
                             <div className="chart-box">
-
+                                <div className="header-v1-box">
+                                    <span>{"อัตราการทำงานของเภสัชกร\nในวันจันทร์-วันศุกร์"}</span>
+                                </div>
+                                <div className="body-v1-box">
+                                    <div className="static-body">
+                                        <div className="static-wrapper">
+                                            <div className="stick-1 c1"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-2 c1"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-3 c1"></div>
+                                        </div>
+                                    </div>
+                                    <div className="dynamic-body">
+                                        <span>36</span>
+                                        <span style={{fontSize:'5vh'}}> %</span>
+                                    </div>
+                                </div>
                             </div>
                             <div className="h-filler"></div>
                             <div className="chart-box">
-                        
+                                <div className="header-v1-box">
+                                    <span>{"อัตราการทำงานของเภสัชกร\nในวันเสาร์"}</span>
+                                </div>
+                                <div className="body-v1-box">
+                                    <div className="static-body">
+                                        <div className="static-wrapper">
+                                            <div className="stick-1 c2"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-2 c2"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-3 c2"></div>
+                                        </div>
+                                    </div>
+                                    <div className="dynamic-body">
+                                        <span>20</span>
+                                        <span style={{fontSize:'5vh'}}> %</span>
+                                    </div>
+                                </div>
                             </div>
                             <div className="h-filler"></div>
                             <div className="chart-box">
-                        
+                                <div className="header-v1-box">
+                                    <span>{"อัตราการทำงานของเภสัชกร\nในวันอาทิตย์"}</span>
+                                </div>
+                                <div className="body-v1-box">
+                                    <div className="static-body">
+                                        <div className="static-wrapper">
+                                            <div className="stick-1 c3"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-2 c3"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-3 c3"></div>
+                                        </div>
+                                    </div>
+                                    <div className="dynamic-body">
+                                        <span>14</span>
+                                        <span style={{fontSize:'5vh'}}> %</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="h-filler"></div>
+                            <div className="chart-box">
+                                <div className="header-v1-box">
+                                    <span>{"อัตราการทำงานของเภสัชกร\nในวันหยุดทางราชการ"}</span>
+                                </div>
+                                <div className="body-v1-box">
+                                    <div className="static-body">
+                                        <div className="static-wrapper">
+                                            <div className="stick-1 c4"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-2 c4"></div>
+                                            <div className="stick-trans"></div>
+                                            <div className="stick-3 c4"></div>
+                                        </div>
+                                    </div>
+                                    <div className="dynamic-body">
+                                        <span>100</span>
+                                        <span style={{fontSize:'5vh'}}> %</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="filler"></div>
