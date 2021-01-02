@@ -262,6 +262,7 @@
                 width: 100%;
                 height: calc(100% - 60px);
                 overflow-x: scroll;
+                overflow-y: hidden;
     
                 .graph1,.graph2,.graph3,.graph4{
                     position: relative;
