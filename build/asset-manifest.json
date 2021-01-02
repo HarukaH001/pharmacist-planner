@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.600dee02.chunk.css",
+    "main.css": "/static/css/main.c570b2a5.chunk.css",
     "main.js": "/static/js/main.3d743123.chunk.js",
     "main.js.map": "/static/js/main.3d743123.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.3387dcb8.js",
@@ -12,7 +12,7 @@
     "static/js/3.19b27824.chunk.js.map": "/static/js/3.19b27824.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.4662504d.chunk.css.map": "/static/css/2.4662504d.chunk.css.map",
-    "static/css/main.600dee02.chunk.css.map": "/static/css/main.600dee02.chunk.css.map",
+    "static/css/main.c570b2a5.chunk.css.map": "/static/css/main.c570b2a5.chunk.css.map",
     "static/js/2.facb0c22.chunk.js.LICENSE.txt": "/static/js/2.facb0c22.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/static/media/FC Iconic Regular.203b6ffd.ttf",
     "static/media/hospital-image.04abc95a.svg": "/static/media/hospital-image.04abc95a.svg",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.3387dcb8.js",
     "static/css/2.4662504d.chunk.css",
     "static/js/2.facb0c22.chunk.js",
-    "static/css/main.600dee02.chunk.css",
+    "static/css/main.c570b2a5.chunk.css",
     "static/js/main.3d743123.chunk.js"
   ]
 }
