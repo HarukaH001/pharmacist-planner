@@ -181,6 +181,9 @@ export const Pharmacist = () => {
                             },
                             gridLines: {
                                 display: false
+                            },
+                            ticks: {
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }],
                         yAxes: [{
@@ -193,7 +196,8 @@ export const Pharmacist = () => {
                             ticks: {
                                 beginAtZero: true,
                                 steps: 2,
-                                max: 20
+                                max: 20,
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }]
                     },

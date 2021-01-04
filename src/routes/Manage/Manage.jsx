@@ -52,7 +52,7 @@ export const Manage = () => {
     async function fetch(){
         setLoaded(false)
         let res = await axios.get(base_url+'/staff_manage_chart')
-        console.log(res.data)
+        // console.log(res.data)
         setContent(res.data)
         setLoaded(true)
     }
@@ -258,6 +258,9 @@ export const Manage = () => {
                             },
                             gridLines: {
                                 display: false
+                            },
+                            ticks: {
+                                fontSize: window.innerWidth < 1600 ? 14 : 16
                             }
                         }],
                         yAxes: [{
@@ -270,7 +273,8 @@ export const Manage = () => {
                             },
                             ticks: {
                                 beginAtZero: true,
-                                max: 80
+                                max: 80,
+                                fontSize: window.innerWidth < 1600 ? 14 : 16
                             }
                         }]
                     },
@@ -304,6 +308,9 @@ export const Manage = () => {
                             },
                             gridLines: {
                                 display: false
+                            },
+                            ticks: {
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }],
                         yAxes: [{
@@ -316,7 +323,8 @@ export const Manage = () => {
                             ticks: {
                                 beginAtZero: true,
                                 steps: 2,
-                                max: 20
+                                max: 20,
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }]
                     },
@@ -350,6 +358,9 @@ export const Manage = () => {
                             },
                             gridLines: {
                                 display: false
+                            },
+                            ticks: {
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }],
                         yAxes: [{
@@ -362,7 +373,8 @@ export const Manage = () => {
                             ticks: {
                                 beginAtZero: true,
                                 steps: 2,
-                                max: 20
+                                max: 20,
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }]
                     },
@@ -396,6 +408,9 @@ export const Manage = () => {
                             },
                             gridLines: {
                                 display: false
+                            },
+                            ticks: {
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }],
                         yAxes: [{
@@ -408,7 +423,8 @@ export const Manage = () => {
                             ticks: {
                                 beginAtZero: true,
                                 steps: 2,
-                                max: 20
+                                max: 20,
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }]
                     },
@@ -442,6 +458,9 @@ export const Manage = () => {
                             },
                             gridLines: {
                                 display: false
+                            },
+                            ticks: {
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }],
                         yAxes: [{
@@ -454,7 +473,8 @@ export const Manage = () => {
                             ticks: {
                                 beginAtZero: true,
                                 steps: 2,
-                                max: 20
+                                max: 20,
+                                fontSize: window.innerWidth < 1600 ? 12 : 16
                             }
                         }]
                     },

@@ -177,10 +177,7 @@
 
         .graph-box{
             width: 100%;
-            height: calc(100% - 50px);
-            @media screen and (max-width: 1600px){
-                height: calc(100% - 66px);
-            }
+            height: calc(100% - 66px);
             overflow-x: scroll;
 
             .graph-wrapper{
