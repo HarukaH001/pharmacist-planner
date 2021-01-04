@@ -24,6 +24,12 @@ export const Pharmacist = () => {
     Chart.defaults.global.tooltips.bodyFontFamily = 'mainFont'
     Chart.defaults.global.tooltips.xPadding = 8
     Chart.defaults.global.tooltips.yPadding = 8
+    const typemap = {
+        "เตรียมยาเคมีบำบัด (order)" : "IC",
+        "เตรียมยาเคมีบำบัด" : "C",
+        "Screen ทำงาน 8.00-16.00" : "S",
+        "เตรียมสารอาหารหลอดเลือดดำ" : "T"
+    }
     
 
     useEffect(() =>{
@@ -41,7 +47,6 @@ export const Pharmacist = () => {
         setContent()
         fetch()
         //////
-        setLoaded(true)
         // eslint-disable-next-line
     },[type])
 
@@ -51,132 +56,114 @@ export const Pharmacist = () => {
     },[content,fit])
 
     function reload() {
-        if(content || true){
+        if(content){
             setSex()
             setRole()
             setAge()
             setOverall()
-            let data = ''
-            // if(type === 'อบรมยาเคมีบำบัด'){
-            //     const ref = content.cancer
-            //     if(!content || !ref) data = []
-            //     else 
-            //     data = {
-            //         sex: [ref.sex.male, ref.sex.female, ref.sex.other],
-            //         preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
-            //         age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
-            //     }
-            // } else if(type === 'อบรมเตรียมยาสารอาหาร'){
-            //     const ref = content.nutrient
-            //     if(!content || !ref) data = []
-            //     else 
-            //     data = {
-            //         sex: [ref.sex.male, ref.sex.female, ref.sex.other],
-            //         preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
-            //         age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
-            //     }
-            // } else if(type === 'ไม่มีใบอบรม'){
-            //     const ref = content.nope
-            //     if(!content || !ref) data = []
-            //     else 
-            //     data = {
-            //         sex: [ref.sex.male, ref.sex.female, ref.sex.other],
-            //         preg: [ref.pregnant.preg, ref.pregnant['non-preg']],
-            //         age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
-            //     }
-            // }
+            let data = []
 
-            data = {
-                sex: [12, 10],
-                role: [2, 12,8],
-                age: [3, 6, 25]
+            let ref = content[typemap[type]]
+            if(ref){
+                data = {
+                    sex: [ref.sex.male, ref.sex.female],
+                    role: [ref.role.P, ref.role.O, ref.role.S],
+                    age: [ref.age['more_than55'], ref.age['more_than50'], ref.age['not_50']]
+                }
+
+                let chart_label = []
+                let chart_value = []
+                ref.bar.forEach(ele=>{
+                    chart_label.push(ele.name)
+                    chart_value.push(ele.value)
+                })
+                setOverData({
+                    labels: chart_label,
+                    datasets: [
+                        {
+                            barPercentage: 0.7,
+                            maxBarThickness: 100,
+                            minBarThickness: 30,
+                            backgroundColor: "#5BC0DEBB",
+                            data: chart_value
+                        }
+                    ]
+                })
+    
+                setSex(()=>{
+                    return (
+                        <div className="sex-pie">
+                            <Pie
+                                data={{
+                                    labels: ["",""],
+                                    datasets: [{
+                                        data: data.sex,
+                                        backgroundColor: ['#ACB9FF', '#855CF8']
+                                    }]
+                                }}
+                                options={{
+                                    maintainAspectRatio : false,
+                                }}
+                            ></Pie>
+                        </div>
+                    )
+                })
+    
+                setRole(()=>{
+                    return (
+                        <div className="role-pie">
+                            <Pie
+                                data={{
+                                    labels: ["","",""],
+                                    datasets: [{
+                                        data: data.role,
+                                        backgroundColor: ['#ACB9FF', '#855CF8', '#A758B4']
+                                    }]
+                                }}
+                                options={{
+                                    maintainAspectRatio : false,
+                                }}
+                            ></Pie>
+                        </div>
+                    )
+                })
+    
+                setAge(()=>{
+                    return (
+                        <div className="age-pie">
+                            <Pie
+                                data={{
+                                    labels: ["","",""],
+                                    datasets: [{
+                                        data: data.age,
+                                        backgroundColor: ['#A758B4', '#855CF8', '#ACB9FF']
+                                    }]
+                                }}
+                                options={{
+                                    maintainAspectRatio : false
+                                }}
+                            ></Pie>
+                        </div>
+                    )
+                })
+    
+                setOverall(()=>{
+                    return (
+                        <canvas id="bar-chart-overall"></canvas>
+                    )
+                })
             }
-
-            setOverData({
-                labels: ["test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04"],
-                datasets: [
-                    {
-                        barPercentage: 0.7,
-                        maxBarThickness: 100,
-                        minBarThickness: 30,
-                        backgroundColor: "#5BC0DEBB",
-                        data: [3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12]
-                    }
-                ]
-            })
-
-            setSex(()=>{
-                return (
-                    <div className="sex-pie">
-                        <Pie
-                            data={{
-                                labels: ["",""],
-                                datasets: [{
-                                    data: data.sex,
-                                    backgroundColor: ['#ACB9FF', '#855CF8']
-                                }]
-                            }}
-                            options={{
-                                maintainAspectRatio : false,
-                            }}
-                        ></Pie>
-                    </div>
-                )
-            })
-
-            setRole(()=>{
-                return (
-                    <div className="role-pie">
-                        <Pie
-                            data={{
-                                labels: ["","",""],
-                                datasets: [{
-                                    data: data.role,
-                                    backgroundColor: ['#ACB9FF', '#855CF8', '#A758B4']
-                                }]
-                            }}
-                            options={{
-                                maintainAspectRatio : false,
-                            }}
-                        ></Pie>
-                    </div>
-                )
-            })
-
-            setAge(()=>{
-                return (
-                    <div className="age-pie">
-                        <Pie
-                            data={{
-                                labels: ["","",""],
-                                datasets: [{
-                                    data: data.age,
-                                    backgroundColor: ['#A758B4', '#855CF8', '#ACB9FF']
-                                }]
-                            }}
-                            options={{
-                                maintainAspectRatio : false
-                            }}
-                        ></Pie>
-                    </div>
-                )
-            })
-
-            setOverall(()=>{
-                return (
-                    <canvas id="bar-chart-overall"></canvas>
-                )
-            })
         }
     }
 
     useEffect(()=>{
-        if(overall){
+        if(overall !== undefined && content && loaded){
             const data = overData
             const ctx = document.getElementById('bar-chart-overall')
             const ref = document.querySelector('.graph-wrapper')
-            if(!fit){
-                ref.style.width = Math.floor((data.labels.length / 30) * 100) + '%'
+            if(!fit & ref !== undefined){
+                let cal = Math.floor((data.labels.length / 30) * 100)
+                ref.style.width = cal > 100? cal + '%' : '100%'
             }
             let myLiveChart = new Chart(ctx, {
                 type: 'bar',
@@ -218,7 +205,6 @@ export const Pharmacist = () => {
     async function fetch(){
         setLoaded(false)
         let res = await axios.get(base_url+'/data_chart')
-        // console.log(res.data)
         setContent(res.data)
         setLoaded(true)
     }  

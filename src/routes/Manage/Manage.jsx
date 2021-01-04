@@ -15,6 +15,7 @@ export const Manage = () => {
     const [g2, setG2] = useState()
     const [g3, setG3] = useState()
     const [g4, setG4] = useState()
+    const [percent, setPercent] = useState()
     const [overData, setOverData] = useState()
     const fit = false
     Chart.defaults.global.elements.arc.borderWidth = 0
@@ -26,7 +27,6 @@ export const Manage = () => {
     
 
     useEffect(() =>{
-        reload()
         window.onresize = (e) => {
             reload(e)
         }
@@ -36,20 +36,51 @@ export const Manage = () => {
         // eslint-disable-next-line
     },[content])
 
+    useEffect(() =>{
+        reload()
+        // eslint-disable-next-line
+    },[content,fit])
+
+    useEffect(() =>{
+        // console.log(type)
+        setContent()
+        fetch()
+        //////
+        // eslint-disable-next-line
+    },[])
+
+    async function fetch(){
+        setLoaded(false)
+        let res = await axios.get(base_url+'/staff_manage_chart')
+        console.log(res.data)
+        setContent(res.data)
+        setLoaded(true)
+    }
+
     function reload(e){
-        if(content || true){
+        if(content){
             setOverall()
             setG1()
             setG2()
             setG3()
             setG4()
             ////
-            let label = ["test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04","test01","test02","test03","test04"]
-            let data1 = [3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12]
-            let data2 = [3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12]
-            let data3 = [3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12]
-            let data4 =[3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12,3, 6, 18, 12]
+            setPercent(content.percent)
+            const raw = content.data
+            let label = []
+            let data1 = []
+            let data2 = []
+            let data3 = []
+            let data4 =[]
             let sp = label.map(ele=>0)
+
+            raw.forEach(ele=>{
+                label.push(ele.name)
+                data1.push(ele.chart.D)
+                data2.push(ele.chart.Sat)
+                data3.push(ele.chart.Sun)
+                data4.push(ele.chart.Y)
+            })
             setOverData({
                 data1:{
                     labels: label,
@@ -178,12 +209,13 @@ export const Manage = () => {
     }
 
     useEffect(()=>{
-        if(overall){
+        if(overall !== undefined && content && loaded){
             const data = overData.data1
             const ctx = document.getElementById('bar-chart-overall')
             const ref = document.querySelector('.overall-wrapper')
-            if(!fit){
-                ref.style.width = Math.floor((data.labels.length / 30) * 100) + '%'
+            if(!fit & ref !== undefined){
+                let cal = Math.floor((data.labels.length / 30) * 100)
+                ref.style.width = cal > 100? cal + '%' : '100%'
             }
             let myLiveChart = new Chart(ctx, {
                 type: 'bar',
@@ -248,12 +280,13 @@ export const Manage = () => {
     },[overall])
 
     useEffect(()=>{
-        if(g1){
+        if(g1 !== undefined && content && loaded){
             const data = overData.data2
             const ctx = document.getElementById('bar-chart-g1')
             const ref = document.querySelector('.graph1')
-            if(!fit){
-                ref.style.width = Math.floor((data.labels.length / 30) * 100) + '%'
+            if(!fit & ref !== undefined){
+                let cal = Math.floor((data.labels.length / 30) * 100)
+                ref.style.width = cal > 100? cal + '%' : '100%'
             }
             let myLiveChart = new Chart(ctx, {
                 type: 'bar',
@@ -293,12 +326,13 @@ export const Manage = () => {
     },[g1])
 
     useEffect(()=>{
-        if(g2){
+        if(g2 !== undefined && content && loaded){
             const data = overData.data3
             const ctx = document.getElementById('bar-chart-g2')
             const ref = document.querySelector('.graph2')
-            if(!fit){
-                ref.style.width = Math.floor((data.labels.length / 30) * 100) + '%'
+            if(!fit & ref !== undefined){
+                let cal = Math.floor((data.labels.length / 30) * 100)
+                ref.style.width = cal > 100? cal + '%' : '100%'
             }
             let myLiveChart = new Chart(ctx, {
                 type: 'bar',
@@ -338,12 +372,13 @@ export const Manage = () => {
     },[g2])
 
     useEffect(()=>{
-        if(g3){
+        if(g3 !== undefined && content && loaded){
             const data = overData.data4
             const ctx = document.getElementById('bar-chart-g3')
             const ref = document.querySelector('.graph3')
-            if(!fit){
-                ref.style.width = Math.floor((data.labels.length / 30) * 100) + '%'
+            if(!fit & ref !== undefined){
+                let cal = Math.floor((data.labels.length / 30) * 100)
+                ref.style.width = cal > 100? cal + '%' : '100%'
             }
             let myLiveChart = new Chart(ctx, {
                 type: 'bar',
@@ -383,12 +418,13 @@ export const Manage = () => {
     },[g3])
 
     useEffect(()=>{
-        if(g4){
+        if(g4 !== undefined && content && loaded){
             const data = overData.data5
             const ctx = document.getElementById('bar-chart-g4')
             const ref = document.querySelector('.graph4')
-            if(!fit){
-                ref.style.width = Math.floor((data.labels.length / 30) * 100) + '%'
+            if(!fit & ref !== undefined){
+                let cal = Math.floor((data.labels.length / 30) * 100)
+                ref.style.width = cal > 100? cal + '%' : '100%'
             }
             let myLiveChart = new Chart(ctx, {
                 type: 'bar',
@@ -449,7 +485,7 @@ export const Manage = () => {
                                         </div>
                                     </div>
                                     <div className="dynamic-body">
-                                        <span>36</span>
+                                        <span>{percent?.MonFri || 'NaN'}</span>
                                         <span style={{fontSize:'5vh'}}> %</span>
                                     </div>
                                 </div>
@@ -470,7 +506,7 @@ export const Manage = () => {
                                         </div>
                                     </div>
                                     <div className="dynamic-body">
-                                        <span>20</span>
+                                        <span>{percent?.Sat || 'NaN'}</span>
                                         <span style={{fontSize:'5vh'}}> %</span>
                                     </div>
                                 </div>
@@ -491,7 +527,7 @@ export const Manage = () => {
                                         </div>
                                     </div>
                                     <div className="dynamic-body">
-                                        <span>14</span>
+                                        <span>{percent?.Sun || 'NaN'}</span>
                                         <span style={{fontSize:'5vh'}}> %</span>
                                     </div>
                                 </div>
@@ -512,7 +548,7 @@ export const Manage = () => {
                                         </div>
                                     </div>
                                     <div className="dynamic-body">
-                                        <span>100</span>
+                                        <span>{percent?.Yood || 'NaN'}</span>
                                         <span style={{fontSize:'5vh'}}> %</span>
                                     </div>
                                 </div>
