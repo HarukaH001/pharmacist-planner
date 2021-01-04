@@ -251,7 +251,7 @@ export const Manage = () => {
                         xAxes: [{
                             stacked: true,
                             scaleLabel: {
-                                display: true,
+                                display: false,
                                 labelString: "ชื่อเภสัชกร",
                                 fontSize: 20,
                                 fontFamily: 'mainFont'
@@ -297,7 +297,7 @@ export const Manage = () => {
                     scales: {
                         xAxes: [{
                             scaleLabel: {
-                                display: true,
+                                display: false,
                                 labelString: "ชื่อเภสัชกร",
                                 fontSize: 20,
                                 fontFamily: 'mainFont'
@@ -343,7 +343,7 @@ export const Manage = () => {
                     scales: {
                         xAxes: [{
                             scaleLabel: {
-                                display: true,
+                                display: false,
                                 labelString: "ชื่อเภสัชกร",
                                 fontSize: 20,
                                 fontFamily: 'mainFont'
@@ -389,7 +389,7 @@ export const Manage = () => {
                     scales: {
                         xAxes: [{
                             scaleLabel: {
-                                display: true,
+                                display: false,
                                 labelString: "ชื่อเภสัชกร",
                                 fontSize: 20,
                                 fontFamily: 'mainFont'
@@ -435,7 +435,7 @@ export const Manage = () => {
                     scales: {
                         xAxes: [{
                             scaleLabel: {
-                                display: true,
+                                display: false,
                                 labelString: "ชื่อเภสัชกร",
                                 fontSize: 20,
                                 fontFamily: 'mainFont'

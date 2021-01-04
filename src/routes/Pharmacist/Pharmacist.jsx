@@ -174,7 +174,7 @@ export const Pharmacist = () => {
                     scales: {
                         xAxes: [{
                             scaleLabel: {
-                                display: true,
+                                display: false,
                                 labelString: "ชื่อเภสัชกร",
                                 fontSize: 20,
                                 fontFamily: 'mainFont'
