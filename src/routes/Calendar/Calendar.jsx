@@ -16,6 +16,8 @@ export const Calendar = () => {
     const [days, setDays] = useState()
     const [fDate, setFDate] = useState()
     const [loaded, setLoaded] = useState(false)
+    const [tableHead, setTableHead] = useState([])
+    const [tableBody, setTableBody] = useState([])
     const base_url = window.api + "/planner"
     
     useEffect(()=>{
@@ -29,7 +31,6 @@ export const Calendar = () => {
                 showPicker(false)
             }
         }
-
         return ()=>{
             window.onmousedown = null
             window.onmouseup = null
@@ -42,10 +43,10 @@ export const Calendar = () => {
     // },[contents])
 
     useEffect(()=>{
-        if(!picker && selectedMonth !== lastSelected){
+        if((!picker && selectedMonth !== lastSelected)){
             const [mm, yyyy] = selectedMonth.split('/')
-            console.log('fetch data of ' + selectedMonth)
-            console.log('the days in this month of this year is ' + daysInMonth(mm,yyyy))
+            // console.log('fetch data of ' + selectedMonth)
+            // console.log('the days in this month of this year is ' + daysInMonth(mm,yyyy))
             setDays(daysInMonth(mm,yyyy))
             setFDate(firstDateInMonth(mm,yyyy))
             fetch()
@@ -53,6 +54,13 @@ export const Calendar = () => {
         }
         // eslint-disable-next-line
     },[picker])
+
+    useEffect(()=>{
+        renderTableHead2()
+        renderUserTable()
+        // eslint-disable-next-line
+    },[contents])
+
 
     async function fetch(){
         setLoaded(false)
@@ -92,7 +100,12 @@ export const Calendar = () => {
 
     function formatMonth(date) {
         const [yyyy, mm] = date.split('-')
-        return mm + '/' + yyyy
+        return parseInt(mm) + '/' + yyyy
+    }
+
+    function formatMonthFull(date){
+        const [mm, yyyy] = date.split('/')
+        return (mm < 10? '0'+mm : mm) + '/' + yyyy
     }
 
     function daysInMonth (month, year) {
@@ -134,13 +147,11 @@ export const Calendar = () => {
         for (let i = 0; i < days; i++) {
             ar[i] = i + 1
         }
-
-        return ar.map((ele, i) => {
+        setTableHead(ar.map((ele, i) => {
             let isHoliday = false
             try{
                 isHoliday = holidays[selectedMonth.split('/')[1]][selectedMonth.split('/')[0]].includes(ele)
             } catch (e) {
-
             }
 
             return (
@@ -148,7 +159,7 @@ export const Calendar = () => {
                     {dates[(index + i)%7]}
                 </th>
             )
-        })
+        }))
     }
 
     function renderTableBody(schedule, inside, highlight) {
@@ -185,16 +196,16 @@ export const Calendar = () => {
                 ar[i] = i + 1
             }
 
-            return ar.map((ele, index) => {
-                    const fname = contents[index].name
+            setTableBody(ar.map((ele, index) => {
+                const fname = contents[index].name
 
-                    return (
-                        <tr key={"r1-"+index}>
-                            <td className={"name-td" + (index%2===0?" highlight":"")} colSpan="3">{fname}</td>
-                            {renderTableBody(contents[index].schedule, false,index%2===0)}
-                        </tr>
-                    )
-            })
+                return (
+                    <tr key={"r1-"+index}>
+                        <td className={"name-td" + (index%2===0?" highlight":"")} colSpan="3">{fname}</td>
+                        {renderTableBody(contents[index].schedule, false,index%2===0)}
+                    </tr>
+                )
+            }))
         }
     }
 
@@ -272,7 +283,7 @@ export const Calendar = () => {
                                 <path className="pick" fillRule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 3.5c0-.276.244-.5.545-.5h10.91c.3 0 .545.224.545.5v1c0 .276-.244.5-.546.5H2.545C2.245 5 2 4.776 2 4.5v-1zm7.336 9.29c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm.066-2.544c.625 0 1.184-.484 1.184-1.18 0-.832-.527-1.23-1.16-1.23-.586 0-1.168.387-1.168 1.21 0 .817.543 1.2 1.144 1.2zm-2.957-2.89v5.332H5.77v-4.61h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z" />
                             </svg>
                         </div>
-                        <div className="text pick">{selectedMonth}</div>
+                        <div className="text pick">{formatMonthFull(selectedMonth)}</div>
                         </div>
                         {picker?<div className="modal-picker pick">
                             {renderMonthPicker()}
@@ -323,11 +334,11 @@ export const Calendar = () => {
                                     {renderTableHead()}
                                 </tr>
                                 <tr>
-                                    {renderTableHead2()}
+                                    {tableHead}
                                 </tr>
                             </thead>
                             <tbody>
-                                {renderUserTable()}
+                                {tableBody}
                             </tbody>
                         </Table>
                         :
