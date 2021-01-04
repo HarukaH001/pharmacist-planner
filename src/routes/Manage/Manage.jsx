@@ -72,7 +72,6 @@ export const Manage = () => {
             let data2 = []
             let data3 = []
             let data4 =[]
-            let sp = label.map(ele=>0)
 
             raw.forEach(ele=>{
                 label.push(ele.name)
@@ -81,6 +80,9 @@ export const Manage = () => {
                 data3.push(ele.chart.Sun)
                 data4.push(ele.chart.Y)
             })
+
+            let sp = label.map(ele=>0)
+            
             setOverData({
                 data1:{
                     labels: label,
