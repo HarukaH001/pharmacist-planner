@@ -186,7 +186,7 @@ export const Calendar = () => {
             }
 
             return i!==0 && (
-                <td className={"stat-td noselect " + (highlight ? "highlight" : "coverlight")} key={"h" + ele} style={{paddingTop:(assigned === '-' ? '0.6rem':'0.4rem'),fontSize:(assigned === '-' ? '1rem':'1.2rem'),backgroundColor:((index + (i-1))%7) === 0 ? '#E19F9D' : ((index + (i-1))%7) === 6 ? '#B8A4F2' : isHoliday ? '#B7E6F4' : ''}}>
+                <td className={"stat-td noselect " + (highlight ? "highlight" : "coverlight")} key={"h" + ele} style={{paddingTop:(assigned === '-' ? '0.6rem':'0.4rem'),fontSize:(assigned === '-' ? '0.8rem':'1rem'),backgroundColor:((index + (i-1))%7) === 0 ? '#E19F9D' : ((index + (i-1))%7) === 6 ? '#B8A4F2' : isHoliday ? '#B7E6F4' : ''}}>
                     {assigned}
                 </td>
             )
