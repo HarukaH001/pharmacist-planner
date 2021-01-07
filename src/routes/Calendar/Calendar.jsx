@@ -83,7 +83,7 @@ export const Calendar = () => {
         await axios({
             method: 'get',
             url: window.api+'/pharmacy/generate_planner?year='+ now.getFullYear() + "&month=" + (now.getMonth()+1) + "&day=" + now.getDate() + "&add=true",
-            timeout: 10000
+            timeout: window.timeout
         })
         // await axios.get(window.api+'/pharmacy/generate_planner?year='+ now.getFullYear() + "&month=" + (now.getMonth()+1) + "&day=" + now.getDate() + "&add=true")
         // await new Promise(resolve=>setTimeout(resolve, 3000))
