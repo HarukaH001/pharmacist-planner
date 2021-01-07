@@ -28,7 +28,7 @@ export const Home = () => {
                         <div className="right-panel">
                             <div className="info-header">
                                 แผนกเภสัชกรรม
-                                <div className="info-header-eng">Pharmacentical Department</div>
+                                <div className="info-header-eng">Pharmaceutical Department</div>
                             </div>
                             <div className="info-history-header">
                                 ประวัติโรงพยาบาล
