@@ -275,7 +275,7 @@ export const Manage = () => {
                             },
                             ticks: {
                                 beginAtZero: true,
-                                max: 80,
+                                max: 20,
                                 fontSize: window.innerWidth < 1600 ? 14 : 16
                             }
                         }]
