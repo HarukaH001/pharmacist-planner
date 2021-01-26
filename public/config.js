@@ -1,2 +1,2 @@
 window.api = "https://akio777.nsharuk.com/PM"
-window.timeout = 20000
+window.timeout = 60000

@@ -80,10 +80,12 @@ export const Calendar = () => {
 
     async function reschedule(){
         setLoaded(false)
+        console.log(selectedMonth)
         let now = new Date()
+        let [mm,yyyy] = selectedMonth.split('/')
         await axios({
             method: 'get',
-            url: window.api+'/pharmacy/generate_planner?year='+ now.getFullYear() + "&month=" + (now.getMonth()+1) + "&day=" + now.getDate() + "&add=false",
+            url: window.api+'/pharmacy/generate_planner?year='+ yyyy + "&month=" + mm + "&day=" + now.getDate() + "&add=false",
             timeout: window.timeout
         })
         // await axios.get(window.api+'/pharmacy/generate_planner?year='+ now.getFullYear() + "&month=" + (now.getMonth()+1) + "&day=" + now.getDate() + "&add=true")
